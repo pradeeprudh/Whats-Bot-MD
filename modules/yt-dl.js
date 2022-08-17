@@ -66,3 +66,54 @@ _________________________`;
     }
   }
 );
+
+
+ezio.addCommand(
+  { 
+    pattern: ["yt-video"], 
+    desc: "you can dowloade video from youtube", 
+    sucReact: "📥", 
+    category: ["downloade", "all"] 
+},
+  async (message, client) => {
+    if (!message.client.text) {
+        await client.sendErrorMessage(
+          message.from,
+          lang.NEED_TEXT_SONG,
+          message.key,
+          message
+        );
+        return global.catchError = true;
+    }
+    try {
+        let video = (await yts(message.client.text)).videos[0];
+        let caption = `
+—————————————————————————
+♻ Title : ${video.title}
+♻ Ext : Search [first video]
+♻ ID : ${video.videoId}
+♻ Duration : ${video.timestamp}
+♻ Viewes : ${video.views}
+♻ Uploaded On : ${video.ago}
+♻ Author : ${video.author.name}
+♻ Channel : ${video.author.url}
+♻ Description : ${video.description}
+♻ Url : ${video.url}
+—————————————————————————`;
+
+        await client.sendMessage( message.from, { image: {url: video.thumbnail }, caption, }, { quoted: message })
+        let result = await ytv(video.url)
+        const aMsg = await client.sendMessage( message.from, { video: { url: result.dl_link }, caption: ezio.config.exif.cap}, { quoted: message })
+        await client.sendReact(message.from, '🎞', aMsg.key);
+        global.catchError = false;
+    } catch (error) {
+        await client.sendErrorMessage(
+          message.from,
+          error,
+          message.key,
+          message
+        );
+        return (global.catchError = true);
+    }
+  }
+);
