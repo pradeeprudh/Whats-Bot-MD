@@ -50,9 +50,9 @@ ezio.addCommand(
 ${ezio.config.exif.cap}
 _________________________`;
 
-        await sock.sendMessage( message.from, { video: {url: video.thumbnail }, caption, }, { quoted: message })
+        await client.sendMessage( message.from, { video: {url: video.thumbnail }, caption, }, { quoted: message })
         let audio = await yta(video.url)
-        await sock.sendMessage( message.from, { audio: { url: audio.dl_link }, mimetype: 'audio/mp4' }, { quoted: message })
+        await client.sendMessage( message.from, { audio: { url: audio.dl_link }, mimetype: 'audio/mp4' }, { quoted: message })
         global.catchError = false;
     } catch (error) {
         await client.sendErrorMessage(
