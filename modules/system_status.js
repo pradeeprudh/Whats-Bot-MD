@@ -30,14 +30,14 @@ ezio.addCommand(
       let timestampe = speed();
       let Wspeed = speed() - timestampe;
       // const Footer = ezio.jsonConfig.footer;
-      const Content = `
-┌─❖
+      const Content = `┌─❖
 │「 Hi 👋 」
-└┬❖ 「 ${message.client.name} 」
+└┬❖ 「 ${message.client.pushName} 」
 ┌┤✑  I'm alive Now🎉
 ││✑  🐦🖐️!!
 │└───────────────┈ ⳹
 │ 「 BOT INFO 」
+│✙
 │✙ 𝗦𝗽𝗲𝗲𝗱 : ${Wspeed.toFixed(4)} miliseconds
 │✙ 𝗥𝘂𝗻𝘁𝗶𝗺𝗲 : ${runtime(process.uptime())}
 │✙ 𝗕𝗼𝘁 𝗡𝗮𝗺𝗲 : Whats_Bot_MD
@@ -49,8 +49,10 @@ ezio.addCommand(
 │✙ 𝗧𝗼𝘁𝗮𝗹 𝗛𝗶𝘁𝘀 : ${global.mydb.hits}
 └┬──────────────┈ ⳹
  │✑  D & T : ${ov_time}
- │✑  Please Select The Button Below.
  └───────────────┈ ⳹`;
+
+  // │✑  Please Select The Button Below.
+
 
       // const templateButtons = [
       //   {
