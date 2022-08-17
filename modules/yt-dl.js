@@ -30,7 +30,7 @@ ezio.addCommand(
           message.key,
           message
         );
-        return global.catchError = false;
+        return global.catchError = true;
     }
     try {
         let video = (await yts(message.client.text)).videos[0];
@@ -50,18 +50,19 @@ ezio.addCommand(
 ${ezio.config.exif.cap}
 _________________________`;
 
-        await client.sendMessage( message.from, { video: {url: video.thumbnail }, caption, }, { quoted: message })
+        await client.sendMessage( message.from, { image: {url: video.thumbnail }, caption, }, { quoted: message })
         let audio = await yta(video.url)
-        await client.sendMessage( message.from, { audio: { url: audio.dl_link }, mimetype: 'audio/mp4' }, { quoted: message })
+        const aMsg = await client.sendMessage( message.from, { audio: { url: audio.dl_link }, mimetype: 'audio/mp4' }, { quoted: message })
+        await client.sendReact(message.from, '🎧', aMsg.key);
         global.catchError = false;
     } catch (error) {
         await client.sendErrorMessage(
           message.from,
-          'Error: ' + error,
+          error,
           message.key,
           message
         );
-        return (global.catchError = false);
+        return (global.catchError = true);
     }
   }
 );
