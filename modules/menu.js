@@ -40,7 +40,7 @@ ezio.addCommand(
 
         if (command.category.includes('all')) {
             command.pattern.map((cmd) => {
-              CMD_HELP += "│ *🎀 :-* ```" +  + cmd + "```\n";
+              CMD_HELP += "│ *🎀 :-* ```" + prefix + cmd + "```\n";
             });
         }
       });
