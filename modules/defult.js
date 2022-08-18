@@ -15,7 +15,7 @@ const ezio = require("../events");
 
 ezio.addCommand(
   {
-    pattern: ["url", "donate"],
+    pattern: ["e_urls", "donate"],
     dontAddCommandList: true,
     sucReact: "👩‍💻",
   },

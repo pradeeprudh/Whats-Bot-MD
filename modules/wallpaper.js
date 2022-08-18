@@ -1274,7 +1274,7 @@ ezio.addCommand(
     // const buttons = [{buttonId: ".wallpaper",buttonText: { displayText: "Next Wallpaper 🔀⏩" },type: 1,},];
     const Message = {
       image: { url: r_text[i] },
-      caption: conf.cap,
+      caption: ezio.config.exif.cap,
       // footer: ezio.config.exif.footer,
       // buttons,
     };
