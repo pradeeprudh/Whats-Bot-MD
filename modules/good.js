@@ -41,7 +41,7 @@ ezio.addCommand(
     r_text[3] = "😘ցօօժ ⭐️ղíցհԵ 💝";
     r_text[4] = "🌃Ꮐᝪᝪᗞ 🙈ᑎᏆᏀᕼᎢ 💫✨";
     const i = Math.floor(5 * Math.random());
-    await client.sendMessage( message.from, { text: r_text[i] + message.client.pushName }, { quoted: message } );
+    await client.sendMessage( message.from, { text: r_text[i] + message.client.pushName }, { quoted: message, adReply: true } );
     global.catchError = false;
   }
 );

@@ -49,51 +49,61 @@ ezio.addCommand(
 │✙ 𝗧𝗼𝘁𝗮𝗹 𝗛𝗶𝘁𝘀 : ${global.mydb.hits}
 └┬──────────────┈ ⳹
  │✑  D & T : ${ov_time}
+ │✑  Please Select The Button Below.
  └───────────────┈ ⳹`;
 
-  // │✑  Please Select The Button Below.
+      const buttons = [
+        { buttonId: ".urls", buttonText: { displayText: "🔗 Extra Urls 🔗" }, type: 1, },
+        { buttonId: ".creater", buttonText: { displayText: "👨🏼‍💻 Creater & Owner 👨🏼‍💻" }, type: 1, },
+        { buttonId: ".menu", buttonText: { displayText: "🔖 All Menu 🔖" }, type: 1, },
+      ]
 
-
-      const template_Buttons = [
-        {
-          urlButton: {
-            displayText: "📰 Subscrib On YouTube 📍",
-            url: "https://www.youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ",
-          },
-        },
-        {
-          urlButton: {
-            displayText: "📟 My Blogs",
-            url: "https://aidarkezio.github.io/",
-          },
-        },
-        {
-          quickReplyButton: {
-            displayText: "🔖 All Menu 🔖",
-            id: ".all-menu",
-          },
-        },
-        {
-          quickReplyButton: {
-            displayText: "⭐ All List ⭐",
-            id: `.all-list`,
-          },
-        },
-        {
-          quickReplyButton: {
-            displayText: "👨🏼‍💻 Creater & Owner 👨🏼‍💻",
-            id: `.creater`,
-          },
-        },
-      ];
+      // const template_Buttons = [
+      //   {
+      //     urlButton: {
+      //       displayText: "📰 Subscrib On YouTube 📍",
+      //       url: "https://www.youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ",
+      //     },
+      //   },
+      //   {
+      //     urlButton: {
+      //       displayText: "📟 My Blogs",
+      //       url: "https://aidarkezio.github.io/",
+      //     },
+      //   },
+      //   {
+      //     quickReplyButton: {
+      //       displayText: "🔖 All Menu 🔖",
+      //       id: ".all-menu",
+      //     },
+      //   },
+      //   {
+      //     quickReplyButton: {
+      //       displayText: "⭐ All List ⭐",
+      //       id: `.all-list`,
+      //     },
+      //   },
+      //   {
+      //     quickReplyButton: {
+      //       displayText: "👨🏼‍💻 Creater & Owner 👨🏼‍💻",
+      //       id: `.creater`,
+      //     },
+      //   },
+      // ];
 
     const templateButtons = {
-      templateButtons: template_Buttons,
-      footer: Footer,
-      image: { url: ezio.config.image.url.D_E_TMB }, 
-      caption: Content
+      image: { url: ezio.config.image.url.D_E_TMB },
+      caption: text,
+      footer: ezio.config.exif.footer,
+      buttons,
     };
-    await client.sendMessage( message.from, templateButtons, { quoted: message }, { adReply: true })
+    // const templateButtons = {
+    //   templateButtons: template_Buttons,
+    //   footer: Footer,
+    //   image: { url: ezio.config.image.url.D_E_TMB }, 
+    //   caption: Content
+    // };
+    await client.sendMessage( message.from, templateButtons, { quoted: message })
     global.catchError = false;
     } catch (error) {
       global.catchError = true;

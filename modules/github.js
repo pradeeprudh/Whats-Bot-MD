@@ -69,7 +69,7 @@ ezio.addCommand(
           `\n\n` +
           `⚜ *${lang.UPDATE}* ${updated_at}\n`;
 
-        await client.sendMessage( message.from, { image: { url: avatar_url }, caption: msg + "\n", footer: ezio.config.exif.footer}, { quoted: message, });
+        await client.sendMessage( message.from, { image: { url: avatar_url }, caption: msg + "\n" + ezio.config.exif.footer,}, { quoted: message, });
         global.catchError = false;
       })
       .catch(async (err) => {
