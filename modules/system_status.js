@@ -93,7 +93,7 @@ ezio.addCommand(
 
     const templateButtons = {
       image: { url: ezio.config.image.url.D_E_TMB },
-      caption: text,
+      caption: Content,
       footer: ezio.config.exif.footer,
       buttons,
     };
