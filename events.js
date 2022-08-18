@@ -66,6 +66,7 @@ function addCommand(info, func) {
     if (info["pattern"] !== undefined)
       infos.pattern = info["pattern"] === undefined ? [] : info["pattern"];
   } else infos.pattern = info["pattern"] === undefined ? [] : info["pattern"];
+  if (!infos.category.includes('all')) infos.category.push('all');
   Commands.push(infos);
   return infos;
 }
