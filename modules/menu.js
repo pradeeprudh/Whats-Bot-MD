@@ -17,7 +17,7 @@ const Lang = ezio.getString("_whats");
 
 ezio.addCommand({ pattern: ["menu", 'help'], desc: Lang.DESCC, sucReact: "📰", category: ["all", "system"] }, async (message, client) => {
   try {
-    let prefix = new String
+    let prefix = new String; 
     if (!message.client.prefix || !message.client.prefix.length == 1) prefix = '.';
     let CMD_HELP = `
 ◉═════════════◉
@@ -29,14 +29,34 @@ ezio.addCommand({ pattern: ["menu", 'help'], desc: Lang.DESCC, sucReact: "📰",
     ezio.commands.map((command) => {
       if ( command.dontAddCommandList || command.pattern === undefined || command.pattern === null) return;
       if (command.category.includes('all')) { command.pattern.map((cmd) => CMD_HELP += "│ *🎀 :-* ```" + prefix + cmd + "```\n")}
-    });
+    }); 
     CMD_HELP += "│\n│ 💓 Created By Whats_Bot-MD\n└─────────◉";
-
     await client.sendMessage( message.from,{ image: { url: ezio.config.image.url.D_E_TMB }, caption: CMD_HELP, }, { quoted: message });
     global.catchError = false;
+  } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.from, error, message.key, message);}
+});
 
-  } catch (error) {
-    global.catchError = true;
-    return await client.sendErrorMessage( message.from, error, message.key, message);
-  }
+// ################################
+// ################################
+// ################################
+
+ezio.addCommand({ pattern: ["logo-menu"], desc: Lang.DESCC, sucReact: "📰", category: ["all", "system"] }, async (message, client) => {
+  try {
+    let prefix = new String; 
+    if (!message.client.prefix || !message.client.prefix.length == 1) prefix = '.';
+    let CMD_HELP = `
+◉═════════════◉
+  🫧Whats-Bot Commands🫧
+◉═════════════◉
+┌─(⚜ All Commands)
+│
+`;
+    ezio.commands.map((command) => {
+      if ( !command.dontAddCommandList || command.pattern === undefined || command.pattern === null) return;
+      if (command.category.includes('logo')) { command.pattern.map((cmd) => CMD_HELP += "│ *🎀 :-* ```" + prefix + cmd + "```\n")}
+    }); 
+    CMD_HELP += "│\n│ 💓 Created By Whats_Bot-MD\n└─────────◉";
+    await client.sendMessage( message.from,{ image: { url: ezio.config.image.url.D_E_TMB }, caption: CMD_HELP, }, { quoted: message });
+    global.catchError = false;
+  } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.from, error, message.key, message);}
 });

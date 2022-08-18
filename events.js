@@ -35,7 +35,7 @@ const errorMessage = (msg) => {
 const infoMessage = (msg) => {
   return "🤖 *Info*: ```" + msg + "```";
 };
-// ["search", "all", "downloade", "chat", "system", 'fun', '18+', 'owner', 'create', 'group' ];
+// ["search", "all", "downloade", "chat", "system", 'fun', '18+', 'owner', 'create', 'group', "logo" ];
 function addCommand(info, func) {
   // const react = getString("react")["SUCCESS"];
   var types = ["photo", "image", "text", "message"];
