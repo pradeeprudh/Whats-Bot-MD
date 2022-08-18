@@ -48,7 +48,7 @@ ezio.addCommand(
       footer: ezio.config.exif.footer,
       buttons,
     };
-    await client.sendMessage( message.from, buttonMessage, { quoted: message })
+    await client.sendMessage( message.from, buttonMessage, { quoted: message }, { adReply: true })
     global.catchError = false;
     
     } catch (error) {
