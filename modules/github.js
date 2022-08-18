@@ -26,44 +26,16 @@ ezio.addCommand(
 
     if (!pname) {
       global.catchError = true;
-      return await client.sendMessage(
-        message.from,
-        { text: ezio.errorMessage(lang.REPLY) },
-        { quoted: message }
-      );
+      return await client.sendMessage( message.from, { text: ezio.errorMessage(lang.REPLY) }, { quoted: message } );
     }
 
-    await axios
-      .get(`https://api.github.com/users/${pname}`)
+    await axios.get(`https://api.github.com/users/${pname}`)
       .then(async (response) => {
-        const {
-          login,
-          avatar_url,
-          html_url,
-          twitter_username,
-          bio,
-          name,
-          company,
-          public_repos,
-          public_gists,
-          followers,
-          location,
-          following,
-          created_at,
-          blog,
-          type,
-          email,
-          updated_at,
-        } = response.data;
+        const { login, avatar_url, html_url, twitter_username, bio, name, company, public_repos, public_gists, followers, location, following, created_at, blog, type, email, updated_at, } = response.data;
 
         if (response.data.message) {
           global.catchError = true;
-          return await client.sendErrorMessage(
-            message.from,
-            ezio.errorMessage(response.data.message),
-            message.key,
-            message
-          );
+          return await client.sendErrorMessage( message.from, ezio.errorMessage(response.data.message), message.key, message );
         }
 
         const msg =
@@ -97,36 +69,12 @@ ezio.addCommand(
           `\n\n` +
           `⚜ *${lang.UPDATE}* ${updated_at}\n`;
 
-        let linkPreview = {
-            'canonical-url': ezio.config.image.url.D_E_DPC,
-            'matched-text': '',
-            title: 'Github user status',
-            description: ezio.config.exif.author,
-            // jpegThumbnail: Buffer,
-        }
-
-        await client.sendMessage(
-          message.from,
-          {
-            image: { url: avatar_url },
-            caption: msg + "\n" + ezio.config.exif.footer,
-            linkPreview,
-            contextInfo: { forwardingScore: 2000, isForwarded: true },
-          },
-          {
-            quoted: message,
-          }
-        );
+        await client.sendMessage( message.from, { image: { url: avatar_url }, caption: msg + "\n", footer: ezio.config.exif.footer}, { quoted: message, });
         global.catchError = false;
       })
       .catch(async (err) => {
         (global.catchError = true),
-          await client.sendErrorMessage(
-            message.from,
-            ezio.errorMessage(lang.NOT + "\n\n" + err),
-            message.key,
-            message
-          );
+          await client.sendErrorMessage( message.from, ezio.errorMessage(lang.NOT + "\n\n" + err), message.key, message );
       });
   }
 );

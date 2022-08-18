@@ -24,32 +24,18 @@ ezio.addCommand(
   async (message, client) => {
     if (!message.client.args[0]) {
       global.catchError = true;
-      return await client.sendMessage(
-        message.from,
-        { text: ezio.errorMessage(lang.LINK) },
-        { quoted: message }
-      );
+      return await client.sendMessage(message.from,{ text: ezio.errorMessage(lang.LINK) },{ quoted: message });
     }
     try {
       const torken = process.env.SS || '';
       const uri = encodeURI(message.client.args[0]);
       const url = `https://shot.screenshotapi.net/screenshot?token=${torken}&url=${uri}&file_type=jpeg&full_page=true`;
-
       const response = await got(url);
       const json = JSON.parse(response.body);
-      await client.sendMessage(
-        message.from,
-        { image: { url: json.screenshot }, caption: ezio.config.exif.cap },
-        { quoted: message }
-      );
+      await client.sendMessage( message.from, { image: { url: json.screenshot }, caption: ezio.config.exif.cap }, { quoted: message });
     } catch (error) {
       global.catchError = true;
-      return await client.sendErrorMessage(
-        message.from,
-        error,
-        message.key,
-        message
-      );
+      return await client.sendErrorMessage( message.from, error, message.key, message );
     }
     global.catchError = false;
   }

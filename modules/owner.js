@@ -24,14 +24,7 @@ ezio.addCommand(
   },
   async (message, client) => {
     try {
-      const buttons = [
-        {
-          buttonId: "donate",
-          buttonText: { displayText: "💰 Donate" },
-          type: 1,
-        },
-      ];
-
+      const buttons = [{ buttonId: "donate", buttonText: { displayText: "💰 Donate" }, type: 1, }];
       const text = `---Owner Detals---
 
 ⚜ Name: Dark Ezio.
@@ -49,26 +42,18 @@ ezio.addCommand(
 ------------------
 `;
 
-    //   const buttonMessage = {
-    //     image: { url: "https://avatars.githubusercontent.com/u/87601796?v=4" },
-    //     caption: text,
-    //     footer: ezio.config.exif.footer,
-    //     buttons: buttons,
-    //     headerType: 4,
-    //   };
-
-      await client.sendMessage( message.from, { image: {url: 'https://avatars.githubusercontent.com/u/87601796?v=4' }, caption: text }, { quoted: message })
-      await client.sendMessage( message.from, { image: {url: 'https://avatars.githubusercontent.com/u/87601796?v=4' }, caption: text, buttons }, { quoted: message })
-    //   await client.sendMessage(message.from, buttonMessage);
-      global.catchError = false;
+    const buttonMessage = {
+      image: { url: "https://avatars.githubusercontent.com/u/87601796?v=4" },
+      caption: text,
+      footer: ezio.config.exif.footer,
+      buttons,
+    };
+    await client.sendMessage( message.from, buttonMessage, { quoted: message })
+    global.catchError = false;
+    
     } catch (error) {
       global.catchError = true;
-      return await client.sendErrorMessage(
-        message.from,
-        error,
-        message.key,
-        message
-      );
+      return await client.sendErrorMessage( message.from, error, message.key, message );
     }
   }
 );

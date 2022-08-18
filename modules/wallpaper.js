@@ -1271,26 +1271,20 @@ ezio.addCommand(
       "https://images.wallpaperscraft.com/image/single/smiley_emotions_minimalism_134124_1350x2400.jpg";
 
     var i = Math.floor(r_text.length * Math.random());
-    // const buttons = [
-    //   {
-    //     buttonId: ".wallpaper",
-    //     buttonText: { displayText: "Next Wallpaper 🔀⏩" },
-    //     type: 1,
-    //   },
-    // ];
-    // const buttonMessage = {
-    //   image: { url: r_text[i] },
-    //   caption: conf.cap,
-    //   footer: ezio.jsonConfig.footer,
-    //   buttons: buttons,
-    //   headerType: 4,
-    // };
-    // await client.sendMessage(message.from, buttonMessage);
-    await client.sendMessage(
-      message.from,
-      { image: { url: r_text[i] }, caption: ezio.config.exif.cap },
-      { quoted: message }
-    );
+    const buttons = [
+      {
+        buttonId: ".wallpaper",
+        buttonText: { displayText: "Next Wallpaper 🔀⏩" },
+        type: 1,
+      },
+    ];
+    const buttonMessage = {
+      image: { url: r_text[i] },
+      caption: conf.cap,
+      footer: ezio.config.exif.footer,
+      buttons,
+    };
+    await client.sendMessage( message.from, buttonMessage, { quoted: message } );
     global.catchError = false;
   }
 );

@@ -29,7 +29,7 @@ ezio.addCommand(
     try {
       let timestampe = speed();
       let Wspeed = speed() - timestampe;
-      // const Footer = ezio.jsonConfig.footer;
+      const Footer = ezio.config.exif.footer;
       const Content = `┌─❖
 │「 Hi 👋 」
 └┬❖ 「 ${message.client.pushName} 」
@@ -54,62 +54,50 @@ ezio.addCommand(
   // │✑  Please Select The Button Below.
 
 
-      // const templateButtons = [
-      //   {
-      //     urlButton: {
-      //       displayText: "📰 Subscrib On YouTube 📍",
-      //       url: "https://www.youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ",
-      //     },
-      //   },
-      //   {
-      //     urlButton: {
-      //       displayText: "📟 My Blogs",
-      //       url: "https://aidarkezio.github.io/",
-      //     },
-      //   },
-      //   {
-      //     quickReplyButton: {
-      //       displayText: "🔖 All Menu 🔖",
-      //       id: ".all-menu",
-      //     },
-      //   },
-      //   {
-      //     quickReplyButton: {
-      //       displayText: "⭐ All List ⭐",
-      //       id: `.all-list`,
-      //     },
-      //   },
-      //   {
-      //     quickReplyButton: {
-      //       displayText: "👨🏼‍💻 Creater & Owner 👨🏼‍💻",
-      //       id: `.creater`,
-      //     },
-      //   },
-      // ];
+      const template_Buttons = [
+        {
+          urlButton: {
+            displayText: "📰 Subscrib On YouTube 📍",
+            url: "https://www.youtube.com/channel/UCeDeaDD8dpdMT2gO3VHY1JQ",
+          },
+        },
+        {
+          urlButton: {
+            displayText: "📟 My Blogs",
+            url: "https://aidarkezio.github.io/",
+          },
+        },
+        {
+          quickReplyButton: {
+            displayText: "🔖 All Menu 🔖",
+            id: ".all-menu",
+          },
+        },
+        {
+          quickReplyButton: {
+            displayText: "⭐ All List ⭐",
+            id: `.all-list`,
+          },
+        },
+        {
+          quickReplyButton: {
+            displayText: "👨🏼‍💻 Creater & Owner 👨🏼‍💻",
+            id: `.creater`,
+          },
+        },
+      ];
 
-      // const buttonMessage = {
-      //   text: Content,
-      //   footer: Footer,
-      //   templateButtons: templateButtons,
-      //   image: {
-      //     url: "https://raw.githubusercontent.com/AiDarkEzio/Whats-Bot/master/GojoMedia/D_E-TMB.jpg",
-      //   },
-      // };
-
-    //   await client.sendMessage(message.client.jid, buttonMessage);
-
-    await client.sendMessage( message.from, { image: {url: ezio.config.image.url.D_E_TMB }, caption: Content, }, { quoted: message })
-
-
-      global.catchError = false;
+    const templateButtons = {
+      templateButtons: template_Buttons,
+      footer: Footer,
+      image: { url: ezio.config.image.url.D_E_TMB }, 
+      caption: Content
+    };
+    await client.sendMessage( message.from, templateButtons, { quoted: message }, { adReply: true })
+    global.catchError = false;
     } catch (error) {
       global.catchError = true;
-      return await client.sendErrorMessage(
-        message.from,
-        error,
-        message.key,
-        message
-      );
+      return await client.sendErrorMessage( message.from, error, message.key, message );
     }
   }
 );

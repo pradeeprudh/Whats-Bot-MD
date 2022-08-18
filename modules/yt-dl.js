@@ -24,12 +24,7 @@ ezio.addCommand(
 },
   async (message, client) => {
     if (!message.client.text) {
-        await client.sendErrorMessage(
-          message.from,
-          lang.NEED_TEXT_SONG,
-          message.key,
-          message
-        );
+        await client.sendErrorMessage( message.from, lang.NEED_TEXT_SONG, message.key, message );
         return global.catchError = true;
     }
     try {
@@ -56,12 +51,7 @@ _________________________`;
         await client.sendReact(message.from, '🎧', aMsg.key);
         global.catchError = false;
     } catch (error) {
-        await client.sendErrorMessage(
-          message.from,
-          error,
-          message.key,
-          message
-        );
+        await client.sendErrorMessage( message.from, error, message.key, message );
         return (global.catchError = true);
     }
   }
@@ -77,12 +67,7 @@ ezio.addCommand(
 },
   async (message, client) => {
     if (!message.client.text) {
-        await client.sendErrorMessage(
-          message.from,
-          lang.NEED_TEXT_SONG,
-          message.key,
-          message
-        );
+        await client.sendErrorMessage( message.from, lang.NEED_TEXT_SONG, message.key, message );
         return global.catchError = true;
     }
     try {
@@ -107,12 +92,7 @@ ezio.addCommand(
         await client.sendReact(message.from, '🎞', aMsg.key);
         global.catchError = false;
     } catch (error) {
-        await client.sendErrorMessage(
-          message.from,
-          error,
-          message.key,
-          message
-        );
+        await client.sendErrorMessage( message.from, error, message.key, message );
         return (global.catchError = true);
     }
   }
