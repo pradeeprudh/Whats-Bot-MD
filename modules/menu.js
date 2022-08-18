@@ -27,7 +27,7 @@ ezio.addCommand({ pattern: ["menu", 'help'], desc: Lang.DESCC, sucReact: "📰",
 │
 `;
     ezio.commands.map((command) => {
-      if ( command.dontAddCommandList || command.pattern === undefined || command.pattern === null) return;
+      if (command.dontAddCommandList || command.pattern === undefined || command.pattern === null) return;
       if (command.category.includes('all')) { command.pattern.map((cmd) => CMD_HELP += "│ *🎀 :-* ```" + prefix + cmd + "```\n")}
     }); 
     CMD_HELP += "│\n│ 💓 Created By Whats_Bot-MD\n└─────────◉";
@@ -52,7 +52,7 @@ ezio.addCommand({ pattern: ["logo-menu"], desc: Lang.DESCC, sucReact: "📰", ca
 │
 `;
     ezio.commands.map((command) => {
-      if ( !command.dontAddCommandList || command.pattern === undefined || command.pattern === null) return;
+      if (command.dontAddCommandList || command.pattern === undefined || command.pattern === null) return;
       if (command.category.includes('logo')) { command.pattern.map((cmd) => CMD_HELP += "│ *🎀 :-* ```" + prefix + cmd + "```\n")}
     }); 
     CMD_HELP += "│\n│ 💓 Created By Whats_Bot-MD\n└─────────◉";
