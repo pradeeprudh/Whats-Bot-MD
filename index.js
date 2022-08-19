@@ -37,7 +37,7 @@ global.catchError = false;
 const { state, saveState } = useSingleFileAuthState('./database/baileys/auth_info.json', pino({ level: 'silent' }))
 // ## store
 const store = makeInMemoryStore({logger: pino().child({ level: "silent", stream: "store" })});
-// store.readFromFile("./database/json/baileys/store_multi.json");
+store.readFromFile("./database/json/baileys/store_multi.json");
 setInterval(() => {store.writeToFile("./database/baileys/store_multi.json")}, 30 * 1000);
 // ## requiring commands
 fs.readdirSync("./modules").forEach( file => { if ( path.extname(file).toLowerCase() == ".js" ) { require(`./modules/${file}`) }});

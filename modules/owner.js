@@ -24,7 +24,10 @@ ezio.addCommand(
   },
   async (message, client) => {
     try {
-      const buttons = [{ buttonId: ".donate", buttonText: { displayText: "💰 Donate" }, type: 1, }];
+      const buttons = [
+        { buttonId: ".donate", buttonText: { displayText: "💰 Donate 💰" }, type: 1, },
+        { buttonId: ".extra_urls", buttonText: { displayText: "🔗 Extra Urls 🔗" }, type: 1, },
+      ];
       const text = `------- Owner Detals -------
 
 ⚜ Name: Dark Ezio.
