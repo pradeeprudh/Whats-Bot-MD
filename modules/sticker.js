@@ -30,6 +30,9 @@ ezio.addCommand(
       if (/image|video|sticker/.test(message.client.mime)) {
         let download = await message.quoted.download();
         client.sendFile(message.from, download, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
+      } else if (/image|video|sticker/.test(message.client.mime)) {
+        let download = await message.download();
+        client.sendFile(message.from, download, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
       } else if (message.quoted.mentions[0]) {
         let url = await client.profilePictureUrl(message.quoted.mentions[0], "image");
         client.sendFile(message.from, url, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
