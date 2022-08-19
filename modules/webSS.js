@@ -18,6 +18,7 @@ ezio.addCommand(
   {
     pattern: ["ss"],
     desc: lang.SS_DESC,
+    usage: '<url>',
     sucReact: "🌍",
     category: ["all", "create"],
   },

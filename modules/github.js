@@ -18,6 +18,7 @@ ezio.addCommand(
   {
     pattern: ["github"],
     desc: lang.GITHUB_DESC,
+    usage: '<userName>',
     sucReact: "💻",
     category: ["search", "all"],
   },

@@ -19,6 +19,7 @@ ezio.addCommand(
   { 
     pattern: ["song"], 
     desc: "you can dowloade audio from youtube", 
+    usage: '<url|query>',
     sucReact: "📥", 
     category: ["downloade", "all"] 
 },
@@ -62,6 +63,7 @@ ezio.addCommand(
   { 
     pattern: ["yt-video"], 
     desc: "you can dowloade video from youtube", 
+    usage: '<url|query>',
     sucReact: "📥", 
     category: ["downloade", "all"] 
 },
