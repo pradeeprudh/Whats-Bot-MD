@@ -15,16 +15,16 @@ const ezio = require("../events");
 
 ezio.addCommand(
   {
-    pattern: ["e_urls", "donate"],
+    pattern: ["donate"],
     dontAddCommandList: true,
     sucReact: "👩‍💻",
   },
   async (message, client) => {
     await client.sendMessage(
       message.from,
-      { text: ezio.errorMessage(ezio.config.reply.notFound) },
+      { text: ezio.errorMessage(' 404 :' + ezio.config.reply.notFound) },
       { quoted: message }
     );
-    global.catchError = false;
+    global.catchError = true;
   }
 );

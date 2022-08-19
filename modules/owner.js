@@ -25,7 +25,7 @@ ezio.addCommand(
   async (message, client) => {
     try {
       const buttons = [{ buttonId: ".donate", buttonText: { displayText: "💰 Donate" }, type: 1, }];
-      const text = `---Owner Detals---
+      const text = `------- Owner Detals -------
 
 ⚜ Name: Dark Ezio.
 ⚜ Number: Wa.me/94761539856
@@ -37,9 +37,11 @@ ezio.addCommand(
 ⚜ Instagram: https://instagram.com/subadraposhitha (Poshitha Subadra)
 ⚜ Twitter: https://twitter.com/brosubadra (BroSubadra)
 
+----------------------------
+
 💌 Plz Subscribe Me On  Youtube.
 
-------------------
+----------------------------
 `;
 
     const buttonMessage = {

@@ -27,13 +27,13 @@ const reactArry = async (text = "INFO" || "SUCCESS" || "ERROR") => {
   return picak;
 };
 const successfullMessage = (msg) => {
-  return "👩‍🦰 *Successful*:  ```" + msg + "```";
+  return "👩‍🦰 *Successful*:-  ```" + msg + "```";
 };
 const errorMessage = (msg) => {
-  return "🚀 *Error*:  ```" + msg + "```";
+  return "🚀 *Error*:-  ```" + msg + "```";
 };
 const infoMessage = (msg) => {
-  return "🤖 *Info*: ```" + msg + "```";
+  return "🤖 *Info*:- ```" + msg + "```";
 };
 // ["search", "all", "downloade", "chat", "system", 'fun', '18+', 'owner', 'create', 'group', "logo" ];
 function addCommand(info, func) {
