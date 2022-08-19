@@ -20,7 +20,7 @@ ezio.addCommand(
     pattern: ["wallpaper"],
     desc: lang.WP,
     sucReact: "🌇",
-    category: ["all", "downloade"],
+    category: ["all", "create"],
   },
   async (message, client) => {
     var r_text = new Array();
@@ -1278,7 +1278,7 @@ ezio.addCommand(
       // footer: ezio.config.exif.footer,
       // buttons,
     };
-    await client.sendMessage( message.from, Message, { quoted: message } );
+    await client.sendMessage(message.from, Message, { quoted: message });
     global.catchError = false;
   }
 );

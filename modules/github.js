@@ -23,14 +23,14 @@ ezio.addCommand(
     category: ["search", "all"],
   },
   async (message, client) => {
-    const pname = message.client.text;
+    const uName = message.client.text;
 
-    if (!pname) {
+    if (!uName) {
       global.catchError = true;
       return await client.sendMessage( message.from, { text: ezio.errorMessage(lang.REPLY) }, { quoted: message } );
     }
 
-    await axios.get(`https://api.github.com/users/${pname}`)
+    await axios.get(`${ezio.config.api.github.domain}/users/${uName}`)
       .then(async (response) => {
         const { login, avatar_url, html_url, twitter_username, bio, name, company, public_repos, public_gists, followers, location, following, created_at, blog, type, email, updated_at, } = response.data;
 
