@@ -26,7 +26,7 @@ ezio.addCommand(
   },
   async (message, client) => {
     try {
-      if (!message.quoted) { global.catchError = true; return await client.sendErrorMessage( message.from, 'Reply to Supported media With Caption', message.key, message ); }
+      // if (!message.quoted) { global.catchError = true; return await client.sendErrorMessage( message.from, 'Reply to Supported media With Caption', message.key, message ); }
       if (/image|video|sticker/.test(message.client.mime)) {
         let download = await message.quoted.download();
         client.sendFile(message.from, download, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
@@ -47,7 +47,7 @@ ezio.addCommand(
         let _message = message.quoted.imageMessage || message.quoted.videoMessage;
         let download = await client.downloadMediaMessage(_message);
         client.sendFile(message.from, download, "", message, { asSticker: true, author: config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
-      } else if (quoted.type == "buttonsMessage") {
+      } else if (message.quoted.type == "buttonsMessage") {
         let _message = message.quoted.imageMessage || message.quoted.videoMessage;
         let download = await client.downloadMediaMessage(_message);
         client.sendFile(message.from, download, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });

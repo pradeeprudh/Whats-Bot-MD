@@ -61,7 +61,7 @@ _________________________`;
 
 ezio.addCommand(
   { 
-    pattern: ["yt-video"], 
+    pattern: ["yt-video", 'video'], 
     desc: "you can dowloade video from youtube", 
     usage: '<url|query>',
     sucReact: "📥", 
