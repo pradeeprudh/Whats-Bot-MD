@@ -65,7 +65,7 @@ ezio.addCommand({ pattern: ["logo-menu"], desc: Lang.DESCC, sucReact: "📰", ca
 // ####### SUSTEM MENU ############
 // ################################
 
-ezio.addCommand({ pattern: ["logo-menu"], desc: Lang.DESCC, sucReact: "📰", category: ["all", "system"] }, async (message, client) => {
+ezio.addCommand({ pattern: ["system-menu"], desc: Lang.DESCC, sucReact: "📰", category: ["all", "system"] }, async (message, client) => {
   try {
     let prefix = new String; 
     if (!message.client.prefix || !message.client.prefix.length == 1) prefix = '.';
