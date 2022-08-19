@@ -33,7 +33,7 @@ ezio.addCommand(
       } else if (/image|video|sticker/.test(message.client.mime)) {
         let download = await message.download();
         client.sendFile(message.from, download, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
-      } else if (message.quoted.mentions[0]) {
+      } else if (message.quoted && (message.quoted.mentions[0])) {
         let url = await client.profilePictureUrl(message.quoted.mentions[0], "image");
         client.sendFile(message.from, url, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
       } else if (isUrl(message.client.text)) {
@@ -46,11 +46,11 @@ ezio.addCommand(
           await delay(1000);
           client.sendFile(message.from, url, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"],   });
         }
-      } else if (message.quoted.type == "templateMessage") {
+      } else if (message.quoted && (message.quoted.type == "templateMessage")) {
         let _message = message.quoted.imageMessage || message.quoted.videoMessage;
         let download = await client.downloadMediaMessage(_message);
         client.sendFile(message.from, download, "", message, { asSticker: true, author: config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
-      } else if (message.quoted.type == "buttonsMessage") {
+      } else if (message.quoted && (message.quoted.type == "buttonsMessage")) {
         let _message = message.quoted.imageMessage || message.quoted.videoMessage;
         let download = await client.downloadMediaMessage(_message);
         client.sendFile(message.from, download, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"], });
