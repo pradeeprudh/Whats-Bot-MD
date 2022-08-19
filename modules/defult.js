@@ -22,7 +22,7 @@ ezio.addCommand(
   async (message, client) => {
     await client.sendMessage(
       message.from,
-      { text: ezio.errorMessage(' 404 :' + ezio.config.reply.notFound) },
+      { text: ezio.errorMessage('404 :' + ezio.config.reply.notFound) },
       { quoted: message }
     );
     global.catchError = true;
