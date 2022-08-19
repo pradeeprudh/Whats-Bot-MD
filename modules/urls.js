@@ -47,7 +47,7 @@ ezio.addCommand(
     sucReact: "🔗",
   },
   async (message, client) => {
-    const caption = ezio.config.exif.cap;
+    const caption = "🎟 : *You can scan it with their whatsApp camera to jing this group.*\n\n" + ezio.config.exif.cap;
     const wImageUrl = "https://raw.githubusercontent.com/AiDarkEzio/Whats-Bot-MD_V2/main/database/image/Work_Group_Qr.jpeg";
     const tImageUrl = 'https://raw.githubusercontent.com/AiDarkEzio/Whats-Bot-MD_V2/main/database/image/Work_Group_Qr.jpeg';
     const wImage = { image: { url: wImageUrl }, caption, };
