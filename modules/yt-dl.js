@@ -33,8 +33,8 @@ ezio.addCommand(
       if (media.filesize >= 999999) { global.catchError = true; return await client.sendErrorMessage( message.from, "File Over Limit " + util.format(media), message.key, message ); }
       let caption = `♻ Title : ${media.title}\n♻ File Size : ${media.filesizeF}\n♻ Url : ${message.client.args[0]}\n♻ Ext : MP3\n♻ Resolution : ${message.client.args[1] || "320kbps"}\n\n${ezio.config.exif.cap}`;
       await client.sendMessage( message.from, { image: { url: media.thumb }, caption }, { quoted: message } );
-      const audio = await client.sendMessage( message.from, { audio: { url: media.dl_link }, mimetype: "audio/mpeg", fileName: `${media.title}.mp3`, }, { quoted: message } );
-      await client.sendReact(message.client.jid, "🎧", audio.key);
+      const aMsg = await client.sendMessage( message.from, { audio: { url: media.dl_link }, mimetype: "audio/mpeg", fileName: `${media.title}.mp3`, }, { quoted: message } );
+      await client.sendReact(message.from, "🎧", aMsg.key);
       global.catchError = false;
     } catch (error) {
       await client.sendErrorMessage(message.from, error, message.key, message);
@@ -59,8 +59,8 @@ ezio.addCommand(
       let media = await ytv(message.client.args[0], quality);
       if (media.filesize >= 999999) { global.catchError = true; return await client.sendErrorMessage( message.client.jid, "File Over Limit " + util.format(media), message.key, message ); }
       let caption = `♻ Title : ${media.title}\n♻ File Size : ${media.filesizeF}\n♻ Url : ${message.client.args[0]}\n♻ Ext : MP4\n♻ Resolution : ${message.client.args[1] || "360p"}`;
-      const video = await client.sendMessage( message.client.jid, { video: { url: media.dl_link }, mimetype: "video/mp4", fileName: `${media.title}.mp4`, caption,}, { quoted: message });
-      await client.sendReact(message.client.jid, "🎞", video.key);
+      const vMsg = await client.sendMessage( message.client.jid, { video: { url: media.dl_link }, mimetype: "video/mp4", fileName: `${media.title}.mp4`, caption,}, { quoted: message });
+      await client.sendReact(message.from, "🎞", vMsg.key);
       global.catchError = false;
     } catch (error) {
       await client.sendErrorMessage(message.from, error, message.key, message);

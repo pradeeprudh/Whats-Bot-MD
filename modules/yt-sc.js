@@ -107,7 +107,9 @@ ezio.addCommand(
       };
       await client.sendMessage(message.client.jid, buttonMessage, { quoted: message, });
       global.catchError = false;
-      } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.client.jid, err, message.key, message ); }
+      } catch (error) { 
+        global.catchError = true; 
+        return await client.sendErrorMessage( message.client.jid, error, message.key, message ); }
   }
 );
 

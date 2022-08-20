@@ -83,21 +83,21 @@ ezio.addCommand({ pattern: [`cmds-count`], sucReact: "🆗", category: ["all", "
     let group_cmd = 0;
     let logo_cmd = 0;
     let countcmdOfCmd = 0;
-    ezio.commands.map(cmd => {
-      if (cmd.category.includes('all')) all_cmd += cmd.pattern.length;
-      if (!cmd.dontAddCommandList) visible_cmd += cmd.pattern.length;
-      if (cmd.dontAddCommandList) invisible_cmd += cmd.pattern.length;
-      if (cmd.category.includes("search")) search_cmd += cmd.pattern.length;
-      if (cmd.category.includes("downloade")) downloade_cmd += cmd.pattern.length;
-      if (cmd.category.includes("chat")) chat_cmd += cmd.pattern.length;
-      if (cmd.category.includes("system")) system_cmd += cmd.pattern.length;
-      if (cmd.category.includes("fun")) fun_cmd += cmd.pattern.length;
-      if (cmd.category.includes("18+")) eighteenplus_cmd += cmd.pattern.length;
-      if (cmd.category.includes("owner")) owner_cmd += cmd.pattern.length; 
-      if (cmd.category.includes("create")) create_cmd += cmd.pattern.length; 
-      if (cmd.category.includes("group")) group_cmd += cmd.pattern.length; 
-      if (cmd.category.includes("logo")) logo_cmd += cmd.pattern.length; 
-      countcmdOfCmd = cmd.pattern.length;
+    ezio.commands.map(command => {
+      if (command.category.includes("all")) all_cmd += command.pattern.length;
+      if (!command.dontAddCommandList) visible_cmd += command.pattern.length;
+      if (command.dontAddCommandList) invisible_cmd += command.pattern.length;
+      if (command.category.includes("search")) search_cmd += command.pattern.length;
+      if (command.category.includes("downloade")) downloade_cmd += command.pattern.length;
+      if (command.category.includes("chat")) chat_cmd += command.pattern.length;
+      if (command.category.includes("system")) system_cmd += command.pattern.length;
+      if (command.category.includes("fun")) fun_cmd += command.pattern.length;
+      if (command.category.includes("18+")) eighteenplus_cmd += command.pattern.length;
+      if (command.category.includes("owner")) owner_cmd += command.pattern.length; 
+      if (command.category.includes("create")) create_cmd += command.pattern.length; 
+      if (command.category.includes("group")) group_cmd += command.pattern.length; 
+      if (command.category.includes("logo")) logo_cmd += command.pattern.length; 
+      countcmdOfCmd = command.pattern.length;
     });
     let text = `------- Command Count -------
 
