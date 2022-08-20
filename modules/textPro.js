@@ -74,11 +74,12 @@ ezio.addCommand( { pattern: ["tp-graffiti3"], sucReact: "🖼", category: ['logo
 // ##############################################
 
 ezio.config.api.textpro.takes1.map(logo => {
-  const { pattern, textLenth, url } = logo;
+  const { pattern, textLenth, id } = logo; 
+  const url = ezio.config.api.textpro.domain + id;
   ezio.addCommand( { pattern, sucReact: "🖼", category: ['logo'], usage: '<word>', }, async (message, client) => {
     if (!message.client.args[0]) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(N_T) }, { quoted: message } ); };
     if (message.client.text.length >= textLenth) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(T_L) }, { quoted: message } ); };
-    await maker.textpro(`https://textpro.me/create-wonderful-graffiti-art-text-effect-1011.html`, [message.client.text])
+    await maker.textpro( url, [message.client.text])
     .then( async (data) => { global.catchError = false; return await client.sendMessage( message.from, { image: { url: data }, caption: ezio.config.exif.cap }, { quoted: message }); })
     .catch( async (err) => { global.catchError = true; return await client.sendErrorMessage( message.from, err, message.key, message ); });
   });
