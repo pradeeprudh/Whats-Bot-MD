@@ -97,7 +97,7 @@ ezio.addCommand({ pattern: [`cmds-count`], sucReact: "🆗", category: ["all", "
       if (command.category.includes("create")) create_cmd += command.pattern.length; 
       if (command.category.includes("group")) group_cmd += command.pattern.length; 
       if (command.category.includes("logo")) logo_cmd += command.pattern.length; 
-      countcmdOfCmd = command.pattern.length;
+      countcmdOfCmd += command.pattern.length;
     });
     let text = `------- Command Count -------
 
@@ -129,7 +129,13 @@ ezio.addCommand({ pattern: [`cmds-count`], sucReact: "🆗", category: ["all", "
     };
     await client.sendMessage( message.from, Message, { quoted: message })
     global.catchError = false;
-  } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.from, error, message.key, message);}
+  } catch (error) { 
+    global.catchError = true; 
+    let countcmdOfCmd = 0;
+    ezio.commands.map((command) => { countcmdOfCmd += command.pattern.length });
+    await client.sendMessage(message.from, {text: countcmdOfCmd.toString()}, { quoted: message });
+    return await client.sendErrorMessage( message.from, error, message.key, message);
+  }
 });
 
 // ezio.commands.length.toString()
