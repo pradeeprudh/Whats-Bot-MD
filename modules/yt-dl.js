@@ -26,7 +26,7 @@ ezio.addCommand(
   },
   async (message, client) => {
     if (!message.client.text) { global.catchError = true; return await client.sendErrorMessage( message.from, `Example : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`, message.key, message ); }
-    if (isUrl(message.client.args[0])) { global.catchError = true; return await client.sendErrorMessage( message.from, `Enter url\nExample : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`, message.key, message );}
+    // if (isUrl(message.client.args[0])) { global.catchError = true; return await client.sendErrorMessage( message.from, `Enter url\nExample : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`, message.key, message );}
     try {
       let quality = message.client.args[1] ? message.client.args[1] : "320kbps";
       let media = await yta(message.client.args[0], quality);
@@ -45,7 +45,7 @@ ezio.addCommand(
 
 ezio.addCommand(
   {
-    pattern: ["ryt-video", "rvideo"],
+    pattern: ["ytmp4", "getvideo", "ytvideo"],
     desc: "you can dowloade video from youtube",
     usage: "<url>",
     sucReact: "📥",
@@ -53,7 +53,7 @@ ezio.addCommand(
   },
   async (message, client) => {
     if (!message.client.text) { global.catchError = true; return await client.sendErrorMessage( message.from, `Example : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`, message.key, message ); }
-    if (isUrl(message.client.args[0])) { global.catchError = true; return await client.sendErrorMessage( message.from, `Enter url\nExample : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`, message.key, message );}
+    // if (isUrl(message.client.args[0])) { global.catchError = true; return await client.sendErrorMessage( message.from, `Enter url\nExample : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`, message.key, message );}
     try {
       let quality = message.client.args[1] ? message.client.args[1] : "360p";
       let media = await ytv(message.client.args[0], quality);
