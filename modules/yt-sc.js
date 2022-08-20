@@ -65,7 +65,7 @@ ezio.addCommand(
       };
 
       await client.sendMessage(message.from, Message, { quoted: message});
-    } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.client.jid, error, message.key, message ); }
+    } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.from, error, message.key, message ); }
   }
 );
 
@@ -105,11 +105,12 @@ ezio.addCommand(
         footer: ezio.config.exif.footer,
         buttons: buttons,
       };
-      await client.sendMessage(message.client.jid, buttonMessage, { quoted: message, });
+      await client.sendMessage(message.from, buttonMessage, { quoted: message, });
       global.catchError = false;
       } catch (error) { 
         global.catchError = true; 
-        return await client.sendErrorMessage( message.client.jid, error, message.key, message ); }
+        return await client.sendErrorMessage( message.from, error, message.key, message ); 
+      }
   }
 );
 
@@ -139,8 +140,8 @@ ezio.addCommand(
         buttonText: "📃 Results Here 📃",
         sections,
       };
-      await client.sendMessage(message.client.jid, listMessage, { quoted: message, });
+      await client.sendMessage(message.from, listMessage, { quoted: message, });
       global.catchError = true;
-    } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.client.jid, error, message.key, message ); }
+    } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.from, error, message.key, message ); }
   }
 );
