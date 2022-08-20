@@ -10,10 +10,8 @@
 => Whats Bot - Dark_Ezio.
 // ════════════════════════════ */
 
-const got = require("got");
 const ezio = require("../events");
 const maker = require("mumaker");
-const lang = ezio.getString("webss");
 let N_T = "Need Text."
 let T_L = "Text is too long."
 let T_L_1 = "First text is too long."
@@ -72,5 +70,16 @@ ezio.addCommand( { pattern: ["tp-graffiti3"], sucReact: "🖼", category: ['logo
 });
 
 // ##############################################
-// ############### ############## ###############
+// ############# mapping takes1 #################
 // ##############################################
+
+ezio.config.api.textpro.takes1.map(logo => {
+  const { pattern, textLenth, url } = logo;
+  ezio.addCommand( { pattern, sucReact: "🖼", category: ['logo'], usage: '<word>', }, async (message, client) => {
+    if (!message.client.args[0]) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(N_T) }, { quoted: message } ); };
+    if (message.client.text.length >= textLenth) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(T_L) }, { quoted: message } ); };
+    await maker.textpro(`${ezio.config.api.textpro.domain}${url}.html`, [message.client.text])
+    .then( async (data) => { global.catchError = false; return await client.sendMessage( message.from, { image: { url: data }, caption: ezio.config.exif.cap }, { quoted: message }); })
+    .catch( async (err) => { global.catchError = true; return await client.sendErrorMessage( message.from, err, message.key, message ); });
+  });
+});

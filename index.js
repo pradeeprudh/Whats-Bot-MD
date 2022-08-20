@@ -175,8 +175,7 @@ const WhatsBotConnect = async () => {
     });
 
     setInterval(async () => {
-        const get_localized_date = { weekday: "long", year: "numeric", month: "long", day: "numeric", };
-        var utch = new Date().toLocaleDateString("EN", get_localized_date);
+        var utch = new Date().toLocaleDateString("EN", { weekday: "long", year: "numeric", month: "long", day: "numeric", });
         var ov_time = new Date().toLocaleString("LK", { timeZone: "Asia/Colombo" }).split(" ")[1];
         const biography = "📅 " + utch + "\n⌚ " + ov_time + "\n\n💗 Auto Bio Powered By Whats Bot...💬\n\n👨🏼‍💻 Created By Dark_Ezio";
         await conn.updateProfileStatus(biography);
