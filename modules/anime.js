@@ -20,7 +20,7 @@ ezio.config.api.waifu.sfw.map(category => {
         .then(async (res) => {
             message.client.command == `anime-${category}`
             ? await client.sendFile(message.from, res.data.url, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"]})
-            : await client.sendMessage( message.from, { image: { url: res.data.url }, caption: ezio.config.exif.footer, gifPlayback: true }, { quoted: message } );
+            : await client.sendMessage( message.from, { video: { url: res.data.url }, caption: ezio.config.exif.footer, gifPlayback: true }, { quoted: message } );
             global.catchError = false;
         }).catch(async (err) => { global.catchError = true; await client.sendErrorMessage(message.from,ezio.errorMessage(err),message.key,message); });
     });
@@ -32,9 +32,9 @@ ezio.config.api.waifu.nsfw.map(category => {
         if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
         await axios.get(`${ezio.config.api.waifu.domain}/nsfw/${category}`)
         .then(async (res) => {
-            message.client.command == `anime-${category}`
+            message.client.command == `xanime-${category}`
             ? await client.sendFile(message.from, res.data.url, "", message, { asSticker: true, author: ezio.config.exif.author, packname: ezio.config.exif.packname, categories: ["😄", "😊"]})
-            : await client.sendMessage( message.from, { image: { url: res.data.url }, caption: ezio.config.exif.footer, gifPlayback: true }, { quoted: message } );
+            : await client.sendMessage( message.from, { video: { url: res.data.url }, caption: ezio.config.exif.footer, gifPlayback: true }, { quoted: message } );
             global.catchError = false;
         }).catch(async (err) => { global.catchError = true; await client.sendErrorMessage(message.from,ezio.errorMessage(err),message.key,message); });
     });
