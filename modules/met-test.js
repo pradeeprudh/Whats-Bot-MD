@@ -22,8 +22,8 @@ ezio.addCommand(
   },
   async (message, client) => {
     const caption = `------- WhatsApp Groups -------`;
-    await conn.sendMessage(
-      id,
+    await client.sendMessage(
+      message.from,
       { text: caption },
       {
         quoted: {

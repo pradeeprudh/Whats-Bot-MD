@@ -17,7 +17,7 @@ const { yta, ytv } = require('../lib/y2Mate')
 
 ezio.addCommand(
   { 
-    pattern: ["song"], 
+    pattern: ["song", "rsong"], 
     desc: "you can dowloade audio from youtube", 
     usage: '<url|query>',
     sucReact: "📥", 
@@ -29,11 +29,15 @@ ezio.addCommand(
         return global.catchError = true;
     }
     try {
-        let video = (await yts(message.client.text)).videos[0];
+        let videos = await yts(message.client.text);
+        let video = {};
+        message.client.command == 'song' 
+          ? video = videos.videos[0] 
+          : video = videos.videos[Math.floor(Math.random() * videos.videos.length)]
         let caption = `
 —————————————————————————
 ♻ Title : ${video.title}
-♻ Ext : Search [first video]
+♻ Ext : Search [${message.client.command=='song'?'first':"random"} video]
 ♻ ID : ${video.videoId}
 ♻ Duration : ${video.timestamp}
 ♻ Viewes : ${video.views}
@@ -61,7 +65,7 @@ _________________________`;
 
 ezio.addCommand(
   { 
-    pattern: ["yt-video", 'video'], 
+    pattern: ["ryt-video", 'rvideo'], 
     desc: "you can dowloade video from youtube", 
     usage: '<url|query>',
     sucReact: "📥", 
@@ -73,7 +77,11 @@ ezio.addCommand(
         return global.catchError = true;
     }
     try {
-        let video = (await yts(message.client.text)).videos[0];
+        let videos = await yts(message.client.text);
+        let video = {};
+        message.client.command == 'song' 
+          ? video = videos.videos[0] 
+          : video = videos.videos[Math.floor(Math.random() * videos.videos.length)]
         let caption = `
 —————————————————————————
 ♻ Title : ${video.title}
@@ -86,7 +94,9 @@ ezio.addCommand(
 ♻ Channel : ${video.author.url}
 ♻ Description : ${video.description}
 ♻ Url : ${video.url}
-—————————————————————————`;
+—————————————————————————
+${ezio.config.exif.cap}
+_________________________`;
 
         await client.sendMessage( message.from, { image: {url: video.thumbnail }, caption, }, { quoted: message })
         let result = await ytv(video.url)
