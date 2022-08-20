@@ -80,12 +80,12 @@ ezio.addCommand(
   async (message, client) => {
     try {
       if (!message.client.text) { await client.sendErrorMessage( message.from, lang.NEED_TEXT_SONG, message.key, message ); return global.catchError = true; }
-      const results = await yts(message.forPattern.text);
+      const results = await yts(message.client.text);
       let result = results.videos[Math.floor(Math.random() * results.videos.length)];
       let buttons = [
         { buttonId: `.ytmp3 ${result.url}`, buttonText: { displayText: "🎼 Audio 🎵" }, type: 1, },
         { buttonId: `.ytmp4 ${result.url}`, buttonText: { displayText: "🎞 Video 📽️" }, type: 1, },
-        { buttonId: `.rytplay ${message.forPattern.text}`, buttonText: { displayText: "🔎 Random Search 🔍" }, type: 1, },
+        { buttonId: `.rytplay ${message.client.text}`, buttonText: { displayText: "🔎 Random Search 🔍" }, type: 1, },
       ];
       let buttonMessage = {
         image: { url: result.thumbnail },
@@ -107,7 +107,7 @@ ezio.addCommand(
       };
       await client.sendMessage(message.client.jid, buttonMessage, { quoted: message, });
       global.catchError = false;
-        } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.client.jid, err, message.key, message ); }
+      } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.client.jid, err, message.key, message ); }
   }
 );
 
@@ -122,7 +122,7 @@ ezio.addCommand(
   async (message, client) => {
     if (!message.client.text) { global.catchError = true; return await client.sendErrorMessage( message.from, lang.NEED_TEXT_SONG, message.key, message ); };
     try {
-      const results = await yts(message.forPattern.text);
+      const results = await yts(message.client.text);
       let result = results.videos;
       let rows = [];
       result.map((video) => {
