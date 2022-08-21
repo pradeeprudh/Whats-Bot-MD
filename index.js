@@ -17,11 +17,12 @@ const pino = require("pino")
 const yargs = require("yargs")
 const path = require("path")
 const { Boom } = require("@hapi/boom")
-const { Collection, Simple, Store, upsert } = require("./lib")
+const { Collection, Simple, Store, upsert, eziofunc } = require("./lib")
 const WebMessageInfo = proto.WebMessageInfo
 const Welcome = require("./lib/Welcome");
 const jsoConfig = JSON.parse(fs.readFileSync('./config.json'))
 const ezio = require('./events')
+const { chatting } = eziofunc;
 const { serialize, WAConnection } = Simple
 const Commands = new Collection()
 // global.prefa = /^[#$+.?_&<>!/\\]/
@@ -150,6 +151,7 @@ const WhatsBotConnect = async () => {
         // if (ezio.config.auto.read) await conn.sendReadReceipt(m.key.remoteJid, m.key.participant, [ m.key.id ]);
         // require("./module")(conn, m, Commands, chatUpdate)
         await upsert(conn, m);
+        await chatting(m, conn);
 
         try {
             ezio.commands.map(async command => {

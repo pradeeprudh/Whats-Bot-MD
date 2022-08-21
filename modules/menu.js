@@ -68,7 +68,7 @@ ezio.categories.map(category => {
 
 ezio.addCommand({ pattern: [`cmds-count`], sucReact: "🆗", category: ["all", "system"] }, async (message, client) => {
   try {
-    await client.sendMessage( message.from, { text: ezio.infoMessage('Counting commands 💯') });
+    await client.sendMessage( message.from, { text: ezio.infoMessage('Counting commands 💯') }, { quoted: ezio.config.quoted.quoted1 });
     let all_cmd = 0;
     let visible_cmd = 0;
     let invisible_cmd = 0;
