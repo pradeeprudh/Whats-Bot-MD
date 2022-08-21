@@ -31,6 +31,7 @@ const Commands = new Collection()
 global.mydb = {};
 global.mydb.users = new Array();
 global.mydb.hits = new Number();
+global.isInCmd = false;
 global.catchError = false;
 
 // ## auth state
@@ -139,6 +140,7 @@ const WhatsBotConnect = async () => {
 	});
 
     conn.ev.on("messages.upsert", async (chatUpdate) => {
+        global.isInCmd = false;
         let m = chatUpdate.messages[0]
         m = new serialize(conn, m);
         if (!m.message) return
@@ -153,25 +155,23 @@ const WhatsBotConnect = async () => {
             ezio.commands.map(async command => {
                 for (let i in command.pattern) {
                     if (command.pattern[i] == m.client.command || command.on == 'text') {
+                        global.isInCmd = true;
                         global.mydb.hits += 1;
                         global.catchError = false;
                         await conn.sendReact( m.from, await ezio.reactArry("INFO"), m.key);
                         await conn.sendPresenceUpdate(ezio.config.auto.presence.value, m.from);
                         try { await command.function(m, conn);
-                        } catch (error) { 
-                            global.catchError = true;
-                            console.log(error);
-                        }
+                        } catch (error) { global.catchError = true; console.log(error); }
                         global.catchError
                             ? await conn.sendReact(m.from, await ezio.reactArry("ERROR"), m.key)
                             : await conn.sendReact(m.from, command.sucReact, m.key);
                         await conn.sendPresenceUpdate("available", m.from);
-                    }
+                    } 
                 }
             });
         } catch (e) {
             console.log(e);
-        } 
+        }
     });
 
     setInterval(async () => {
