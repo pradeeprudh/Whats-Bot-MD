@@ -139,13 +139,15 @@ const WhatsBotConnect = async () => {
 
     // Welcome
     conn.ev.on("group-participants.update", async (m) => {
-		Welcome(conn, m);
+        if (ezio.config.setting.blockchat.includes(m.id)) return;
+		else Welcome(conn, m);
 	});
 
     conn.ev.on("messages.upsert", async (chatUpdate) => {
         global.isInCmd = false;
         let m = chatUpdate.messages[0]
         m = new serialize(conn, m);
+        if (ezio.config.setting.blockchat.includes(m.from)) return;
         if (!m.message) return
         if (m.key && m.key.remoteJid == "status@broadcast") return
         if (m.key.id.startsWith("BAE5") && m.key.id.length == 16) return
