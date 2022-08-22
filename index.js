@@ -150,6 +150,7 @@ const WhatsBotConnect = async () => {
         if (m.key && m.key.remoteJid == "status@broadcast") return
         if (m.key.id.startsWith("BAE5") && m.key.id.length == 16) return
         if (global.mydb.users.indexOf(m.sender) == -1) global.mydb.users.push(m.sender);
+        if (ezio.config.auto.read) await conn.readMessages(m.key);
         // if (ezio.config.auto.read) await conn.sendReadReceipt(m.key.remoteJid, m.key.participant, [ m.key.id ]);
         // require("./module")(conn, m, Commands, chatUpdate)
         await upsert(conn, m);
