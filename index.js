@@ -75,6 +75,8 @@ const WhatsBotConnect = async () => {
     // await readCommands()
     let { version, isLatest } = await fetchLatestBaileysVersion()
     let connOptions = {
+      markOnlineOnConnect: true,
+      linkPreviewImageThumbnailWidth: 500,
       printQRInTerminal: true,
       browser: ["Ai Dark Ezio", "Safari", "4.0.0"],
       logger: pino({ level: "silent" }),
