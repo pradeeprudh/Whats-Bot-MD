@@ -36,7 +36,7 @@ ezio.addCommand(
 
         if (response.data.message) {
           global.catchError = true;
-          return await client.sendErrorMessage( message.from, ezio.errorMessage(response.data.message), message.key, message );
+          return await client.sendErrorMessage( message.from, response.data.message, message.key, message );
         }
 
         const msg =
@@ -75,7 +75,7 @@ ezio.addCommand(
       })
       .catch(async (err) => {
         (global.catchError = true),
-          await client.sendErrorMessage( message.from, ezio.errorMessage(lang.NOT + "\n\n" + err), message.key, message );
+          await client.sendErrorMessage( message.from, lang.NOT + "\n\n" + err, message.key, message );
       });
   }
 );
