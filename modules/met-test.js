@@ -26,30 +26,6 @@ ezio.addCommand(
       message.from,
       {
         text: caption,
-        contextInfo: {
-           externalAdReply: {
-
-        /** ExternalAdReplyInfo title */
-        title: "Title",
-
-        /** ExternalAdReplyInfo body */
-        body: 'body',
-
-        /** ExternalAdReplyInfo mediaType */
-        mediaType: 1,
-
-        /** ExternalAdReplyInfo mediaUrl */
-        mediaUrl: ezio.config.image.url.D_E_DPC,
-
-        /** ExternalAdReplyInfo sourceUrl */
-        sourceUrl: ezio.config.exif.web,
-
-        /** ExternalAdReplyInfo containsAutoReply */
-        containsAutoReply: true,
-
-        /** ExternalAdReplyInfo showAdAttribution */
-        showAdAttribution: true
-    }}
       },
       {
         quoted: message,

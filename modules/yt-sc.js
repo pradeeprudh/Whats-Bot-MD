@@ -135,7 +135,7 @@ ezio.addCommand(
       const sections = [ { title: "Videos", rows: rows, }, ];
       const listMessage = {
         text: "Youtube Search Results",
-        footer: ezio.jsonConfig.footer,
+        footer: ezio.config.exif.footer,
         title: "Whats Bot MD V5",
         buttonText: "📃 Results Here 📃",
         sections,
