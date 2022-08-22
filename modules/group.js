@@ -79,7 +79,7 @@ ezio.addCommand({ pattern: ["g-add"], usage: '<num1/numb2&etc>', sucReact: "😋
         let array = message.client.text.replace('+', '').replace(' ', '').split('/');
         array.map((item) => (item += "@s.whatsapp.net")); 
         await client.sendMessage( message.from, { text: ezio.infoMessage("😋 Add group member. Using number.") }, { quoted: message } );
-        await client.groupParticipantsUpdate( message.from, [array], "add" );
+        await client.groupParticipantsUpdate( message.from, array, "add" );
     }  catch (err) {
         global.catchError = true
         await client.sendErrorMessage( message.from, err, message.key, message );
