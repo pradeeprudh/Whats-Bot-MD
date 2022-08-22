@@ -138,16 +138,16 @@ ezio.addCommand({ pattern: ["g-open", "g-close", "g-lock", "g-unlock"], sucReact
     if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
     if (!message.isGroup) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.group) }, { quoted: message } ); };
     try {
-        if (!message.client.command == "g-open") {
+        if (message.client.command == "g-open") {
             await client.sendMessage( message.from, { text: ezio.infoMessage("⚙ Opening group") }, { quoted: message } );
             await client.groupSettingUpdate(message.from, "not_announcement");
-        } else if (!message.client.command == "g-close") {
+        } else if (message.client.command == "g-close") {
             await client.sendMessage( message.from, { text: ezio.infoMessage("⚙ Closing group") }, { quoted: message } );
             await client.groupSettingUpdate(message.from, "announcement");
-        } else if (!message.client.command == "g-unlock") {
+        } else if (message.client.command == "g-unlock") {
             await client.sendMessage( message.from, { text: ezio.infoMessage("⚙ Unlocking group") }, { quoted: message } );
             await client.groupSettingUpdate(message.from, "unlocked");
-        } else if (!message.client.command == "g-lock") {
+        } else if (message.client.command == "g-lock") {
             await client.sendMessage( message.from, { text: ezio.infoMessage("⚙ locking group") }, { quoted: message } );
             await client.groupSettingUpdate(message.from, "locked");
         }
@@ -214,7 +214,7 @@ ezio.addCommand({ pattern: ["g-joing"], sucReact: "🆗", category: ["group", "a
     if (!message.client.text) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage('Enter link') }, { quoted: message } ); };
     if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
     try {
-        let urlArray = (message.quoted.text ? message.quoted.text : message.client.args[0]).split("/"); 
+        let urlArray = (message.client.args[0]).split("/"); 
         if (!urlArray[2] == 'chat.whatsapp.com') { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage('Enter valid link') }, { quoted: message } ); };
         const response = await client.groupAcceptInvite(urlArray[3]);
         await client.sendMessage( message.from, { text: `⚜ Joined: ${response}` }, { quoted: message } );
@@ -245,7 +245,7 @@ ezio.addCommand({ pattern: ["invite-info"], sucReact: "🆗", category: ["group"
   async (message, client) => {
     if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
     try {
-        let urlArray = (message.quoted.text ? message.quoted.text : message.client.args[0]).split("/")[3]; 
+        let urlArray = (message.client.args[0]).split("/")[3]; 
         let { id, owner, subject, subjectOwner, subjectTime, creation, desc, descOwner, descId, restrict, announce, size, participants, ephemeralDuration, } = await client.groupGetInviteInfo(urlArray);
         await client.sendMessage( message.from, { text: `⚜ Joined: ${id} ${owner} ${subject} ${subjectOwner} ${subjectTime} ${creation} ${desc} ${descOwner} ${descId} ${restrict} ${announce} ${size} ${ephemeralDuration}` }, { quoted: message } );
         global.catchError = false;
