@@ -28,7 +28,7 @@ ezio.addCommand(
         text: caption,
       },
       {
-        quoted: message,
+        quoted: ezio.config.quoted.quoted2,
       }
     );
     global.catchError = false;
