@@ -28,7 +28,16 @@ ezio.addCommand(
         text: caption,
       },
       {
-        quoted: ezio.config.quoted.quoted2,
+        quoted: ezio.config.quoted.image,
+      }
+    );
+    await client.sendMessage(
+      message.from,
+      {
+        text: caption,
+      },
+      {
+        quoted: ezio.config.quoted.product,
       }
     );
     global.catchError = false;
