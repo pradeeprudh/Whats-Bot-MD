@@ -24,9 +24,11 @@ ezio.addCommand(
     const caption = `------- WhatsApp Groups -------`;
     const Message = {
       linkPreview: {
-        'canonical-url': 'https://aidarkezio.github.io/',
+        'canonical-url': 'https://aidarkezio.github.io',
         'matched-text': 'https://aidarkezio.github.io/',
-        title: "Subhadra Bro"
+        title: "Subhadra Poshi",
+        description: 'This is a WhatsApp user bot \n\nSend this number: Alive',
+        jpegThumbnail: ezio.config.image.encd.D_E_ADEC
       },
       text: caption
     }
