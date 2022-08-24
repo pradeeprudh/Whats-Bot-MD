@@ -57,7 +57,7 @@ _________________________`;
           image: {url: video.thumbnail },
           caption,
           footer: ezio.config.exif.footer,
-          Buttons,
+          buttons: Buttons,
         };
         await client.sendMessage( message.from, Message, { quoted: message })
         let audio = await yta(video.url)
@@ -114,7 +114,7 @@ _________________________`;
           image: {url: video.thumbnail },
           caption,
           footer: ezio.config.exif.footer,
-          Buttons,
+          buttons: Buttons,
         };
         await client.sendMessage( message.from, Message, { quoted: message })
         let result = await ytv(video.url)
