@@ -37,7 +37,7 @@ ezio.addCommand(
         let caption = `
 —————————————————————————
 ♻ Title : ${video.title}
-♻ Ext : Search [${message.client.command=='song'?'first':"random"} video]
+♻ Ext : Search [${message.client.command=='song'?'first':"random"} song]
 ♻ ID : ${video.videoId}
 ♻ Duration : ${video.timestamp}
 ♻ Viewes : ${video.views}
@@ -50,7 +50,16 @@ ezio.addCommand(
 ${ezio.config.exif.cap}
 _________________________`;
 
-        await client.sendMessage( message.from, { image: {url: video.thumbnail }, caption, }, { quoted: message })
+        const Buttons = [
+          { buttonId: `ytmp4-s ${video.url}`, buttonText: { displayText: "🎞 Video 📽️" }, type: 1, },
+        ];
+        const Message = {
+          image: {url: video.thumbnail },
+          caption,
+          footer: ezio.config.exif.footer,
+          Buttons,
+        };
+        await client.sendMessage( message.from, Message, { quoted: message })
         let audio = await yta(video.url)
         const aMsg = await client.sendMessage( message.from, { audio: { url: audio.dl_link }, mimetype: 'audio/mp4' }, { quoted: message })
         await client.sendReact(message.from, '🎧', aMsg.key);
@@ -65,7 +74,7 @@ _________________________`;
 
 ezio.addCommand(
   { 
-    pattern: ["ryt-video", 'rvideo'], 
+    pattern: ["ryt-video", 'rvideo', "video", 'yt-video'], 
     desc: "you can dowloade video from youtube", 
     usage: '<url|query>',
     sucReact: "📥", 
@@ -79,13 +88,13 @@ ezio.addCommand(
     try {
         let videos = await yts(message.client.text);
         let video = {};
-        message.client.command == 'song' 
+        message.client.command == 'video' || 'yt-video'
           ? video = videos.videos[0] 
           : video = videos.videos[Math.floor(Math.random() * videos.videos.length)]
         let caption = `
 —————————————————————————
 ♻ Title : ${video.title}
-♻ Ext : Search [first video]
+♻ Ext : Search [${message.client.command == "video"| 'yt-video' ? "first" : "random"} song]
 ♻ ID : ${video.videoId}
 ♻ Duration : ${video.timestamp}
 ♻ Viewes : ${video.views}
@@ -98,7 +107,16 @@ ezio.addCommand(
 ${ezio.config.exif.cap}
 _________________________`;
 
-        await client.sendMessage( message.from, { image: {url: video.thumbnail }, caption, }, { quoted: message })
+        const Buttons = [
+          { buttonId: `ytmp3-s ${video.url}`, buttonText: { displayText: "🎼 Audio 🎵" }, type: 1, },
+        ];
+        const Message = {
+          image: {url: video.thumbnail },
+          caption,
+          footer: ezio.config.exif.footer,
+          Buttons,
+        };
+        await client.sendMessage( message.from, Message, { quoted: message })
         let result = await ytv(video.url)
         const aMsg = await client.sendMessage( message.from, { video: { url: result.dl_link }, caption: ezio.config.exif.cap}, { quoted: message })
         await client.sendReact(message.from, '🎞', aMsg.key);

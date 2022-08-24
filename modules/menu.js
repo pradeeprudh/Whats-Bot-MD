@@ -32,7 +32,7 @@ ezio.addCommand({ pattern: ["menu", 'help'], desc: Lang.DESCC, sucReact: "📰",
       if (command.category.includes('all')) { command.pattern.map((cmd) => CMD_HELP += "│ *🎀 :-* ```" + prefix + cmd + ' ' + command.usage + "```\n")}
     }); 
     CMD_HELP += "│\n│ 💓 Created By Whats_Bot-MD\n└─────────◉";
-    await client.sendMessage( message.from,{ image: { url: ezio.config.image.url.D_E_TMB }, caption: CMD_HELP, }, { quoted: message });
+    await client.sendMessage( message.from,{ image: { url: ezio.config.image.url.D_E_DP_ }, caption: CMD_HELP, }, { quoted: message });
     global.catchError = false;
   } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.from, error, message.key, message);}
 });
@@ -59,7 +59,7 @@ ezio.categories.map(category => {
       if (command.category.includes(category)) { command.pattern.map((cmd) => CMD_HELP += "│ *🎀 :-* ```" + prefix + cmd + ' ' + command.usage + "```\n")}
     }); 
     CMD_HELP += "│\n│ 💓 Created By Whats_Bot-MD\n└─────────◉";
-    await client.sendMessage( message.from,{ image: { url: ezio.config.image.url.D_E_TMB }, caption: CMD_HELP, }, { quoted: message });
+    await client.sendMessage( message.from,{ image: { url: ezio.config.image.url.D_E_DP_ }, caption: CMD_HELP, }, { quoted: message });
     global.catchError = false;
   } catch (error) { global.catchError = true; return await client.sendErrorMessage( message.from, error, message.key, message);}
   });
@@ -68,7 +68,7 @@ ezio.categories.map(category => {
 
 ezio.addCommand({ pattern: [`cmds-count`], sucReact: "🆗", category: ["all", "system"] }, async (message, client) => {
   try {
-    await client.sendMessage( message.from, { text: ezio.infoMessage('Counting commands 💯') }, { quoted: ezio.config.quoted.quoted1 });
+    await client.sendMessage( message.from, { text: ezio.infoMessage('Counting commands 💯') }, { quoted: ezio.config.quoted.product });
     let all_cmd = 0;
     let visible_cmd = 0;
     let invisible_cmd = 0;
@@ -122,7 +122,7 @@ ezio.addCommand({ pattern: [`cmds-count`], sucReact: "🆗", category: ["all", "
       { buttonId: ".system-menu", buttonText: { displayText: "📠 System menu 📠" }, type: 1, },
     ];
     const Message = {
-      image: { url: ezio.config.image.url.D_E_TMB },
+      image: { url: ezio.config.image.url.D_E_DP_ },
       caption: text,
       footer: ezio.config.exif.footer,
       buttons,
