@@ -22,20 +22,17 @@ ezio.addCommand(
   },
   async (message, client) => {
     const caption = `------- WhatsApp Groups -------`;
+    const Message = {
+      linkPreview: {
+        'canonical-url': 'https://aidarkezio.github.io/',
+        'matched-text': 'https://aidarkezio.github.io/',
+        title: "Subhadra Bro"
+      },
+      text: caption
+    }
     await client.sendMessage(
       message.from,
-      {
-        text: caption,
-      },
-      {
-        quoted: ezio.config.quoted.image,
-      }
-    );
-    await client.sendMessage(
-      message.from,
-      {
-        text: caption,
-      },
+      Message,
       {
         quoted: ezio.config.quoted.product,
       }
