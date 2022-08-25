@@ -52,6 +52,13 @@ ezio.addCommand(
       caption: text,
       footer: ezio.config.exif.footer,
       buttons,
+      linkPreview: {
+        "canonical-url": "https://aidarkezio.github.io/",
+        "matched-text": "https://aidarkezio.github.io/",
+        title: "Dark Ezio",
+        description: "This is a WhatsApp user bot. \n\nAlive",
+        jpegThumbnail: ezio.config.image.encd.D_E_ADEC,
+      },
     };
     await client.sendMessage( message.from, buttonMessage, { quoted: message }, { adReply: true })
     global.catchError = false;
