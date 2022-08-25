@@ -21,7 +21,7 @@ ezio.addCommand(
     sucReact: "🎟",
   },
   async (message, client) => {
-    const caption = `------- WhatsApp Groups -------`;
+    const caption = `------- WhatsApp Groups ------- https://aidarkezio.github.io/`;
     const Message = {
       linkPreview: {
         'canonical-url': 'https://aidarkezio.github.io',
