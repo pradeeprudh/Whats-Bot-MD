@@ -33,7 +33,7 @@ ezio.addCommand(
       text: caption,
     };
     const Message2 = {
-      text: teks,
+      text: caption,
       contextInfo: {
         externalAdReply: {
           title: 'global.botname}',
