@@ -21,11 +21,11 @@ ezio.addCommand(
     sucReact: "🎟",
   },
   async (message, client) => {
-    const caption = `------- WhatsApp Groups ------- https://aidarkezio.github.io/`;
+    const caption = `------- WhatsApp Groups ------- `;
     const Message = {
       linkPreview: {
         'canonical-url': 'https://aidarkezio.github.io',
-        'matched-text': 'https://aidarkezio.github.io/',
+        'matched-text': '',
         title: "Subhadra Poshi",
         description: 'This is a WhatsApp user bot \n\nSend this number: Alive',
         jpegThumbnail: ezio.config.image.encd.D_E_ADEC
