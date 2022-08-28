@@ -12,10 +12,9 @@
 
 const ezio = require("../events");
 
-
 ezio.addCommand(
   {
-    pattern: ["donate"],
+    pattern: ["donate", 'report'],
     dontAddCommandList: true,
     sucReact: "👩‍💻",
   },
