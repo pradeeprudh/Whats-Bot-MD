@@ -156,7 +156,7 @@ const WhatsBotConnect = async () => {
         // if (ezio.config.auto.read) await conn.sendReadReceipt(m.key.remoteJid, m.key.participant, [ m.key.id ]);
         // require("./module")(conn, m, Commands, chatUpdate)
         await upsert(conn, m);
-        // await chatting(m, conn);
+        await chatting(m, conn);
 
         try {
             ezio.commands.map(async command => {
