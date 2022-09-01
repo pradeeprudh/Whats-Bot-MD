@@ -256,16 +256,19 @@ ezio.addCommand({ pattern: ["invite-info"], sucReact: "🆗", category: ["group"
   }
 );
 
-ezio.addCommand({ pattern: ["tag"], sucReact: "🆗", category: ["group", "all"], },
+ezio.addCommand({ pattern: ["tag", "tagall"], sucReact: "🆗", category: ["group", "all"], },
   async (message, client) => {
     if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
     if (!message.isGroup) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.group) }, { quoted: message } ); };
     try {
-      let teks = ""; 
-      if (message.client.text) teks = message.client.text;
-      else if (message.quoted.text) teks = message.quoted.text;
-      else if (!teks) return;
-      conn.sendMessage(message.from,{ text: teks, mentions: message.group.participants.map((a) => a.id) },{ quoted: message });
+      let text = ""; 
+      if (message.client.text) text = message.client.text;
+      else if (message.quoted.text) text = message.quoted.text;
+      if (!text || text == '') { 
+        let teks = `╚»˙·٠•●♥ Tag All ♥●•٠·˙«╝\n\n`;
+        for (let mem of message.group.participants) teks += `🔰 @${mem.id.split("@")[0]}\n`; 
+        client.sendMessage(message.from,{ text: teks, mentions: message.group.participants.map((a) => a.id) },{ quoted: message });
+      } else client.sendMessage(message.from,{ text, mentions: message.group.participants.map((a) => a.id) },{ quoted: message });
       global.catchError = false;
     }  catch (err) {
         global.catchError = true
@@ -273,6 +276,28 @@ ezio.addCommand({ pattern: ["tag"], sucReact: "🆗", category: ["group", "all"]
     };
   }
 );
+
+ezio.addCommand({ pattern: ["tagadmin"], sucReact: "🆗", category: ["group", "all"], },
+  async (message, client) => {
+    if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
+    if (!message.isGroup) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.group) }, { quoted: message } ); };
+    try {
+      let text = ""; 
+      if (message.client.text) text = message.client.text;
+      else if (message.quoted.text) text = message.quoted.text;
+      if (!text || text == '') { 
+        let teks = `╚»˙·٠•●♥ Tag Admin ♥●•٠·˙«╝\n\n`;
+        for (let mem of await message.group.participants.filter((v) => v.admin !== null).map((v) => v.id)) teks += `🔰 @${mem.id.split("@")[0]}\n`; 
+        client.sendMessage(message.from,{ text: teks, mentions: await message.group.participants.filter((v) => v.admin !== null).map((v) => v.id) },{ quoted: message });
+      } else client.sendMessage(message.from,{ text, mentions: await message.group.participants.filter((v) => v.admin !== null).map((v) => v.id) },{ quoted: message });
+      global.catchError = false;
+    }  catch (err) {
+        global.catchError = true
+        await client.sendErrorMessage( message.from, err, message.key, message );
+    };
+  }
+);
+
 
 // title & participants
 // const group = await sock.groupCreate("My Fab Group", ["1234@s.whatsapp.net", "4564@s.whatsapp.net"])
