@@ -261,15 +261,14 @@ ezio.addCommand({ pattern: ["tag", "tagall"], sucReact: "🆗", category: ["grou
     if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
     if (!message.isGroup) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.group) }, { quoted: message } ); };
     try {
-      let text = ""; 
-      if (message.client.text) text = message.client.text;
-      else if (message.quoted.text) text = message.quoted.text;
-      if (!text || (text == '') || (text == undefined) || (text == null)) { 
-        let teks = `╚»˙·٠•●♥ Tag All ♥●•٠·˙«╝\n\n`;
-        for (let mem of message.group.participants) teks += `🔰 @${mem.id.split("@")[0]}\n`; 
-        client.sendMessage(message.from,{ text: teks, mentions: message.group.participants.map((a) => a.id) },{ quoted: message });
-      } else client.sendMessage(message.from,{ text, mentions: message.group.participants.map((a) => a.id) },{ quoted: message });
-      global.catchError = false;
+      if (message.client.text.length >= 1 || message.quoted.text.length >= 1) {
+        let text = (message.client.text) ? text = message.client.text : (message.quoted.text) ? text = message.quoted.text : 'Hi'
+        client.sendMessage(message.from,{ text, mentions: await message.group.participants.map((a) => a.id) },{ quoted: message });
+      } else {
+        let teks = `╚»˙·٠•●♥ Tag All ♥●•٠·˙«╝\n\n$`;
+        for (let mem of await message.group.participants.map((a) => a.id)) teks += `🔰 @${mem.id.split("@")[0]}\n`
+        client.sendMessage(message.from,{ text: teks, mentions: await message.group.participants.map((a) => a.id) },{ quoted: message });
+      } global.catchError = false;
     }  catch (err) {
         global.catchError = true
         await client.sendErrorMessage( message.from, err, message.key, message );
@@ -282,15 +281,14 @@ ezio.addCommand({ pattern: ["tagadmin"], sucReact: "🆗", category: ["group", "
     if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
     if (!message.isGroup) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.group) }, { quoted: message } ); };
     try {
-      let text = ""; 
-      if (message.client.text) text = message.client.text;
-      else if (message.quoted.text) text = message.quoted.text;
-      if (!text || (text == '') || (text == undefined) || (text == null)) { 
-        let teks = `╚»˙·٠•●♥ Tag Admin ♥●•٠·˙«╝\n\n`;
-        for (let mem of await message.group.participants.filter((v) => v.admin !== null).map((v) => v.id)) teks += `🔰 @${mem.id.split("@")[0]}\n`; 
+      if (message.client.text.length >= 1 || message.quoted.text.length >= 1) {
+        let text = (message.client.text) ? text = message.client.text : (message.quoted.text) ? text = message.quoted.text : 'Hi'
+        client.sendMessage(message.from,{ text, mentions: await message.group.participants.filter((v) => v.admin !== null).map((v) => v.id) },{ quoted: message });
+      } else {
+        let teks = `╚»˙·٠•●♥ Tag Admin ♥●•٠·˙«╝\n\n$`;
+        for (let mem of await message.group.participants.filter((v) => v.admin !== null)) teks += `🔰 @${mem.id.split("@")[0]}\n`
         client.sendMessage(message.from,{ text: teks, mentions: await message.group.participants.filter((v) => v.admin !== null).map((v) => v.id) },{ quoted: message });
-      } else client.sendMessage(message.from,{ text, mentions: await message.group.participants.filter((v) => v.admin !== null).map((v) => v.id) },{ quoted: message });
-      global.catchError = false;
+      } global.catchError = false;
     }  catch (err) {
         global.catchError = true
         await client.sendErrorMessage( message.from, err, message.key, message );
