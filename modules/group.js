@@ -256,9 +256,44 @@ ezio.addCommand({ pattern: ["invite-info"], sucReact: "🆗", category: ["group"
   }
 );
 
+ezio.addCommand({ pattern: ["tag"], sucReact: "🆗", category: ["group", "all"], },
+  async (message, client) => {
+    if (!message.client.isCreator) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.owner) }, { quoted: message } ); };
+    if (!message.isGroup) { global.catchError = true; return await client.sendMessage( message.from, { text: ezio.errorMessage(ezio.config.reply.group) }, { quoted: message } ); };
+    try {
+      let teks = ""; 
+      if (message.client.text) teks = message.client.text;
+      else if (message.quoted.text) teks = message.quoted.text;
+      else if (!teks) return;
+      conn.sendMessage(message.from,{ text: teks, mentions: message.group.participants.map((a) => a.id) },{ quoted: message });
+      global.catchError = false;
+    }  catch (err) {
+        global.catchError = true
+        await client.sendErrorMessage( message.from, err, message.key, message );
+    };
+  }
+);
+
 // title & participants
 // const group = await sock.groupCreate("My Fab Group", ["1234@s.whatsapp.net", "4564@s.whatsapp.net"])
 // console.log ("created group with id: " + group.gid)
 // sock.sendMessage(group.id, { text: 'hello there' }) // say hello to everyone on the group
 
 
+let p = {
+  id: '',
+  owner: '' | undefined,
+  subject: '',
+  subjectOwner: '',
+  subjectTime: 0,
+  creation: 0,
+  desc: '',
+  descOwner: '',
+  descId: '',
+  /** is set when the group only allows admins to change group settings */
+  restrict: true,
+  /** is set when the group only allows admins to write messages */
+  announce: true,
+  size: 0,
+  participants: [],
+}
