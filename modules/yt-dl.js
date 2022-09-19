@@ -14,7 +14,7 @@ const yts = require("yt-search");
 const ezio = require("../events");
 const lang = ezio.getString("scrapers");
 let { isUrl } = require("../lib/Function");
-const { yta, ytv } = require("../lib/y2Mate");
+const { getAudio, ytv } = require("../lib/y2Mate");
 
 ezio.addCommand(
   {
@@ -25,15 +25,53 @@ ezio.addCommand(
     category: ["downloade", "all"],
   },
   async (message, client) => {
-    if (!message.client.text) { global.catchError = true; return await client.sendErrorMessage( message.from, `Example : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`, message.key, message ); }
+    if (!message.client.text) {
+      global.catchError = true;
+      return await client.sendErrorMessage(
+        message.from,
+        `Example : ${
+          message.client.prefix + message.client.command
+        } https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`,
+        message.key,
+        message
+      );
+    }
     // if (isUrl(message.client.args[0])) { global.catchError = true; return await client.sendErrorMessage( message.from, `Enter url\nExample : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`, message.key, message );}
     try {
-      let quality = message.client.args[1] ? message.client.args[1] : "320kbps";
-      let media = await yta(message.client.args[0], quality);
-      if (media.filesize >= 999999) { global.catchError = true; return await client.sendErrorMessage( message.from, "File Over Limit " + util.format(media), message.key, message ); }
-      let caption = `♻ Title : ${media.title}\n♻ File Size : ${media.filesizeF}\n♻ Url : ${message.client.args[0]}\n♻ Ext : MP3\n♻ Resolution : ${message.client.args[1] || "320kbps"}\n\n${ezio.config.exif.cap}`;
-      await client.sendMessage( message.from, { image: { url: media.thumb }, caption }, { quoted: message } );
-      const aMsg = await client.sendMessage( message.from, { audio: { url: media.dl_link }, mimetype: "audio/mpeg", fileName: `${media.title}.mp3`, }, { quoted: message } );
+      let quality = message.client.args[1] ? message.client.args[1] : "128kbps";
+      let media = await getAudio(message.client.args[0]);
+      if (media == undefined) {
+        await client.sendMessage(message.from,{text: 'Sorry I cant downlode it.'},  { quoted: message });
+        return (global.catchError = true);
+      }
+      if (media.filesize >= 999999) {
+        global.catchError = true;
+        return await client.sendErrorMessage(
+          message.from,
+          "File Over Limit " + util.format(media),
+          message.key,
+          message
+        );
+      }
+      let caption = `♻ Title : ${media.title}\n♻ File Size : ${
+        media.filesizeF
+      }\n♻ Url : ${message.client.args[0]}\n♻ Ext : MP3\n♻ Resolution : ${
+        message.client.args[1] || "320kbps"
+      }\n\n${ezio.config.exif.cap}`;
+      await client.sendMessage(
+        message.from,
+        { image: { url: media.thumb }, caption },
+        { quoted: message }
+      );
+      const aMsg = await client.sendMessage(
+        message.from,
+        {
+          audio: { url: media.dl_link },
+          mimetype: "audio/mpeg",
+          fileName: `${media.title}.mp3`,
+        },
+        { quoted: message }
+      );
       await client.sendReact(message.from, "🎧", aMsg.key);
       global.catchError = false;
     } catch (error) {
@@ -52,14 +90,45 @@ ezio.addCommand(
     category: ["downloade", "all"],
   },
   async (message, client) => {
-    if (!message.client.text) { global.catchError = true; return await client.sendErrorMessage( message.from, `Example : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`, message.key, message ); }
+    if (!message.client.text) {
+      global.catchError = true;
+      return await client.sendErrorMessage(
+        message.from,
+        `Example : ${
+          message.client.prefix + message.client.command
+        } https://youtube.com/watch?v=PtFMh6Tccag%27 360p`,
+        message.key,
+        message
+      );
+    }
     // if (isUrl(message.client.args[0])) { global.catchError = true; return await client.sendErrorMessage( message.from, `Enter url\nExample : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`, message.key, message );}
     try {
       let quality = message.client.args[1] ? message.client.args[1] : "360p";
       let media = await ytv(message.client.args[0], quality);
-      if (media.filesize >= 999999) { global.catchError = true; return await client.sendErrorMessage( message.from, "File Over Limit " + util.format(media), message.key, message ); }
-      let caption = `♻ Title : ${media.title}\n♻ File Size : ${media.filesizeF}\n♻ Url : ${message.client.args[0]}\n♻ Ext : MP4\n♻ Resolution : ${message.client.args[1] || "360p"}`;
-      const vMsg = await client.sendMessage( message.from, { video: { url: media.dl_link }, mimetype: "video/mp4", fileName: `${media.title}.mp4`, caption,}, { quoted: message });
+      if (media.filesize >= 999999) {
+        global.catchError = true;
+        return await client.sendErrorMessage(
+          message.from,
+          "File Over Limit " + util.format(media),
+          message.key,
+          message
+        );
+      }
+      let caption = `♻ Title : ${media.title}\n♻ File Size : ${
+        media.filesizeF
+      }\n♻ Url : ${message.client.args[0]}\n♻ Ext : MP4\n♻ Resolution : ${
+        message.client.args[1] || "360p"
+      }`;
+      const vMsg = await client.sendMessage(
+        message.from,
+        {
+          video: { url: media.dl_link },
+          mimetype: "video/mp4",
+          fileName: `${media.title}.mp4`,
+          caption,
+        },
+        { quoted: message }
+      );
       await client.sendReact(message.from, "🎞", vMsg.key);
       global.catchError = false;
     } catch (error) {
@@ -77,13 +146,48 @@ ezio.addCommand(
     category: ["downloade", "all"],
   },
   async (message, client) => {
-    if (!message.client.text) { global.catchError = true; return await client.sendErrorMessage( message.from, `Example : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`, message.key, message ); }
+    if (!message.client.text) {
+      global.catchError = true;
+      return await client.sendErrorMessage(
+        message.from,
+        `Example : ${
+          message.client.prefix + message.client.command
+        } https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`,
+        message.key,
+        message
+      );
+    }
     try {
-      await client.sendMessage( message.from, { text: ezio.infoMessage('Downloading Audio 📥') }, { quoted: ezio.config.quoted.product });
+      await client.sendMessage(
+        message.from,
+        { text: ezio.infoMessage("Downloading Audio 📥") },
+        { quoted: ezio.config.quoted.product }
+      );
       let quality = message.client.args[1] ? message.client.args[1] : "320kbps";
-      let media = await yta(message.client.args[0], quality);
-      if (media.filesize >= 999999) { global.catchError = true; return await client.sendErrorMessage( message.from, "File Over Limit " + util.format(media), message.key, message ); }
-      const aMsg = await client.sendMessage( message.from, { audio: { url: media.dl_link }, mimetype: "audio/mpeg", fileName: `${media.title}.mp3`, }, { quoted: message } );
+      let media = await getAudio(message.client.args[0], quality);
+            if (media == undefined) {
+        await client.sendMessage(message.from,{text: 'Sorry I cant downlode it.'},  { quoted: message });
+      return (global.catchError = true);
+      }
+
+      if (media.filesize >= 999999) {
+        global.catchError = true;
+        return await client.sendErrorMessage(
+          message.from,
+          "File Over Limit " + util.format(media),
+          message.key,
+          message
+        );
+      }
+      const aMsg = await client.sendMessage(
+        message.from,
+        {
+          audio: { url: media.dl_link },
+          mimetype: "audio/mpeg",
+          fileName: `${media.title}.mp3`,
+        },
+        { quoted: message }
+      );
       await client.sendReact(message.from, "🎧", aMsg.key);
       global.catchError = false;
     } catch (error) {
@@ -101,14 +205,45 @@ ezio.addCommand(
     category: ["downloade", "all"],
   },
   async (message, client) => {
-    if (!message.client.text) { global.catchError = true; return await client.sendErrorMessage( message.from, `Example : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`, message.key, message ); }
+    if (!message.client.text) {
+      global.catchError = true;
+      return await client.sendErrorMessage(
+        message.from,
+        `Example : ${
+          message.client.prefix + message.client.command
+        } https://youtube.com/watch?v=PtFMh6Tccag%27 360p`,
+        message.key,
+        message
+      );
+    }
     try {
-      await client.sendMessage( message.from, { text: ezio.infoMessage('Downloading Video 📥') }, { quoted: ezio.config.quoted.product });
-  let quality = message.client.args[1] ? message.client.args[1] : "360p";
+      await client.sendMessage(
+        message.from,
+        { text: ezio.infoMessage("Downloading Video 📥") },
+        { quoted: ezio.config.quoted.product }
+      );
+      let quality = message.client.args[1] ? message.client.args[1] : "360p";
       let media = await ytv(message.client.args[0], quality);
-      if (media.filesize >= 999999) { global.catchError = true; return await client.sendErrorMessage( message.from, "File Over Limit " + util.format(media), message.key, message ); }
+      if (media.filesize >= 999999) {
+        global.catchError = true;
+        return await client.sendErrorMessage(
+          message.from,
+          "File Over Limit " + util.format(media),
+          message.key,
+          message
+        );
+      }
       let caption = `${ezio.config.exif.cap}`;
-      const vMsg = await client.sendMessage( message.from, { video: { url: media.dl_link }, mimetype: "video/mp4", fileName: `${media.title}.mp4`, caption,}, { quoted: message });
+      const vMsg = await client.sendMessage(
+        message.from,
+        {
+          video: { url: media.dl_link },
+          mimetype: "video/mp4",
+          fileName: `${media.title}.mp4`,
+          caption,
+        },
+        { quoted: message }
+      );
       await client.sendReact(message.from, "🎞", vMsg.key);
       global.catchError = false;
     } catch (error) {
