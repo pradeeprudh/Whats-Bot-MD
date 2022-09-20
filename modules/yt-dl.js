@@ -14,7 +14,7 @@ const yts = require("yt-search");
 const ezio = require("../events");
 const lang = ezio.getString("scrapers");
 let { isUrl } = require("../lib/Function");
-const { getAudio, ytv } = require("../lib/y2Mate");
+const { getAudio, getVideo } = require("../lib/y2Mate");
 
 ezio.addCommand(
   {
@@ -41,7 +41,11 @@ ezio.addCommand(
       let quality = message.client.args[1] ? message.client.args[1] : "128kbps";
       let media = await getAudio(message.client.args[0]);
       if (media == undefined) {
-        await client.sendMessage(message.from,{text: 'Sorry I cant downlode it.'},  { quoted: message });
+        await client.sendMessage(
+          message.from,
+          { text: "Sorry I cant downlode it." },
+          { quoted: message }
+        );
         return (global.catchError = true);
       }
       if (media.filesize >= 999999) {
@@ -104,7 +108,15 @@ ezio.addCommand(
     // if (isUrl(message.client.args[0])) { global.catchError = true; return await client.sendErrorMessage( message.from, `Enter url\nExample : ${ message.client.prefix + message.client.command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`, message.key, message );}
     try {
       let quality = message.client.args[1] ? message.client.args[1] : "360p";
-      let media = await ytv(message.client.args[0], quality);
+      let media = await getVideo(message.client.args[0], quality);
+      if (media == undefined) {
+        await client.sendMessage(
+          message.from,
+          { text: "Sorry I cant downlode it." },
+          { quoted: message }
+        );
+        return (global.catchError = true);
+      }
       if (media.filesize >= 999999) {
         global.catchError = true;
         return await client.sendErrorMessage(
@@ -165,9 +177,13 @@ ezio.addCommand(
       );
       let quality = message.client.args[1] ? message.client.args[1] : "320kbps";
       let media = await getAudio(message.client.args[0], quality);
-            if (media == undefined) {
-        await client.sendMessage(message.from,{text: 'Sorry I cant downlode it.'},  { quoted: message });
-      return (global.catchError = true);
+      if (media == undefined) {
+        await client.sendMessage(
+          message.from,
+          { text: "Sorry I cant downlode it." },
+          { quoted: message }
+        );
+        return (global.catchError = true);
       }
 
       if (media.filesize >= 999999) {
@@ -223,7 +239,15 @@ ezio.addCommand(
         { quoted: ezio.config.quoted.product }
       );
       let quality = message.client.args[1] ? message.client.args[1] : "360p";
-      let media = await ytv(message.client.args[0], quality);
+      let media = await getVideo(message.client.args[0], quality);
+      if (media == undefined) {
+        await client.sendMessage(
+          message.from,
+          { text: "Sorry I cant downlode it." },
+          { quoted: message }
+        );
+        return (global.catchError = true);
+      }
       if (media.filesize >= 999999) {
         global.catchError = true;
         return await client.sendErrorMessage(

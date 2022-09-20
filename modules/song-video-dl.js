@@ -13,7 +13,7 @@
 const yts = require("yt-search");
 const ezio = require("../events");
 const lang = ezio.getString("scrapers");
-const { getAudio, ytv } = require("../lib/y2Mate");
+const { getAudio, getVideo } = require("../lib/y2Mate");
 
 ezio.addCommand(
   {
@@ -72,8 +72,12 @@ _________________________`;
       await client.sendMessage(message.from, Message, { quoted: message });
       let audio = await getAudio(video.url);
       if (audio == undefined) {
-        await client.sendMessage(message.from,{text: 'Sorry I cant downlode it.'},  { quoted: message });
-      return (global.catchError = true);
+        await client.sendMessage(
+          message.from,
+          { text: "Sorry I cant downlode it." },
+          { quoted: message }
+        );
+        return (global.catchError = true);
       }
       const aMsg = await client.sendMessage(
         message.from,
@@ -146,7 +150,15 @@ _________________________`;
         buttons: Buttons,
       };
       await client.sendMessage(message.from, Message, { quoted: message });
-      let result = await ytv(video.url);
+      let result = await getVideo(video.url);
+      if (result == undefined) {
+        await client.sendMessage(
+          message.from,
+          { text: "Sorry I cant downlode it." },
+          { quoted: message }
+        );
+        return (global.catchError = true);
+      }
       const aMsg = await client.sendMessage(
         message.from,
         { video: { url: result.dl_link }, caption: ezio.config.exif.cap },
