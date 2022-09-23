@@ -12,15 +12,10 @@
 2. [`Type-Stript`](https://www.typescriptlang.org/)
 3. [`Python`](https://www.python.org/)
 
-## Based Repo
-
-* [`Killua-Zoldyck`](https://github.com/zhwzein/Killua-Zoldyck "Base Bot")
-
 ## Thanks To
 
-* [`@adiwajshing/baileys`](https://github.com/adiwajshing/baileys)
-* [`Alien-Alfa`](https://github.com/Alien-Alfa)
-* [`DGXeon`](https://github.com/DGXeon)
-* [`AflahXrd`](https://github.com/nexusNw)
+* [`@adiwajshing/baileys`](https://github.com/adiwajshing/baileys "Web Socket")
+* [`@aidarkezio/main-func`](https://www.npmjs.com/package/@aidarkezio/main-func "Main lib")
+* [`Killua-Zoldyck`](https://github.com/zhwzein/Killua-Zoldyck "Base Bot|Repo")
 
 ### License: [MIT]2022

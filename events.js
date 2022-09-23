@@ -11,6 +11,7 @@
 // ════════════════════════════ */
 
 const fs = require("fs");
+const func = require("@aidarkezio/main-func");
 const path = require("path");
 var Commands = [];
 // const jsonConfig = JSON.parse(fs.readFileSync("./lib/config"));
@@ -73,6 +74,7 @@ function addCommand(info, func) {
 }
 
 module.exports = {
+  func,
   addCommand,
   getString,
   reactArry,
