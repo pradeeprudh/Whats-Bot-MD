@@ -3,6 +3,7 @@ const {
     default: WASocket, 
     DisconnectReason, 
     useSingleFileAuthState, 
+    useMultiFileAuthState,
     fetchLatestBaileysVersion, 
     delay, 
     jidNormalizedUser, 
