@@ -39,7 +39,24 @@
     },
     "registrationId": 3,
     "advSecretKey": "DDiOP4UpxlMimKA+5qK7Cd/6fxVX5OsaCIr7KeYnn/I=",
-    "processedHistoryMessages": [],
+    "processedHistoryMessages": [
+      {
+        "key": {
+          "remoteJid": "94761896648@s.whatsapp.net",
+          "fromMe": true,
+          "id": "09316E9783CD9CF7B276E8D3018B011A"
+        },
+        "messageTimestamp": 1664034998
+      },
+      {
+        "key": {
+          "remoteJid": "94761896648@s.whatsapp.net",
+          "fromMe": true,
+          "id": "290863B3D07E9E9370905ED18B849EA7"
+        },
+        "messageTimestamp": 1664035004
+      }
+    ],
     "nextPreKeyId": 31,
     "firstUnuploadedPreKeyId": 31,
     "accountSettings": {
@@ -69,7 +86,7 @@
       }
     ],
     "platform": "android",
-    "lastAccountSyncTimestamp": 1664034987,
+    "lastAccountSyncTimestamp": 1664035206,
     "myAppStateKeyId": "AAAAAPb0"
   },
   "keys": {
@@ -400,8 +417,8 @@
             "_chains": {
               "Ba9o5bQIqf0Loe8iiDSdinISQ1knbPGIEnngbeZplH5D": {
                 "chainKey": {
-                  "counter": 1,
-                  "key": "+IOPpfOAFD+JjnqRNFPNLZSPGfKAFCSy+uEDoNNhAj8="
+                  "counter": 5,
+                  "key": "Rcdkg3CwRV1GqIawtpGV+0X2ByE0FqLL56z6oP2sERw="
                 },
                 "chainType": 2,
                 "messageKeys": {}
