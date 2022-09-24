@@ -14,6 +14,7 @@ const yts = require("yt-search");
 const ezio = require("../events");
 const lang = ezio.getString("scrapers");
 const { getAudio, getVideo } = require("../lib/y2Mate");
+const { createCaption } = require("../lib/ezioFunc");
 
 
 ezio.addCommand(
@@ -56,7 +57,7 @@ ezio.addCommand(
           return global.catchError = true;
         }
         let p = message.client.command == "song" ? false : true;
-        let caption = ezio.config.lib.eziofunc.createCaption(video, p, ezio);
+        let caption = createCaption(video, p, ezio);
         const Buttons = [ { buttonId: `ytmp4-s ${video.url}`, buttonText: { displayText: "🎞 Video 📽️" }, type: 1,},];
         const Message = {
           image: { url: video.thumbnail }, caption,
@@ -128,7 +129,7 @@ ezio.addCommand(
           return global.catchError = true;
         }
         let p = message.client.command == "video" || message.client.command == "yt-video" ? false : true;
-        let caption = ezio.config.lib.eziofunc.createCaption(video, p, ezio);
+        let caption = createCaption(video, p, ezio);
         const Buttons = [ { buttonId: `ytmp3-s ${video.url}`, buttonText: { displayText: "🎼 Audio 🎵" }, type: 1 }, ];
         const Message = {
           image: { url: video.thumbnail }, caption,
