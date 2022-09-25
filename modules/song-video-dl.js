@@ -21,7 +21,7 @@ ezio.addCommand(
   { pattern: ["song", 'rsong'], desc: "you can dowloade audio from youtube", usage: "<url|query>", sucReact: "📥", category: ["downloade", "all"], },
   async (message, client) => {
     if (!message.client.text) {
-      await client.sendErrorMessage( message.from, lang.NEED_TEXT_SONG, message.key, message);
+      await client.sendMessage( message.from,{ text: lang.NEED_TEXT_SONG}, { quoted: message},);
       return global.catchError = true;
     }
     try {
@@ -38,7 +38,7 @@ ezio.addCommand(
             await client.sendReact(message.from, "🎧", aMsg.key);
             global.catchError = false;
           } else {
-            await client.sendErrorMessage(message.from, { text: "*Sorry I cant downlode it.*" }, message.key, message);
+            await client.sendMessage( message.from,{ text: "*Sorry I cant downlode it.*"}, { quoted: message},);
             return global.catchError = true;
           }
         });
@@ -46,19 +46,19 @@ ezio.addCommand(
         let text = message.client.text;
         let ytResult = await yts(text)
         if (ytResult.videos?.[0]?.title == undefined) {
-          await client.sendErrorMessage(message.from, { text: "*Not youtube result found*" }, message.key, message);
+          await client.sendMessage( message.from,{ text: "*Not youtube result found*"}, { quoted: message},);
           return global.catchError = true;
         }
         let video = undefined;
         if (message.client.command == "song") { video = ytResult.videos?.[0] } 
         else { video = ytResult.videos?.[Math.floor(Math.random() * ytResult.videos?.length)] } 
         if (video == undefined) {
-          await client.sendErrorMessage(message.from, { text: "*Not youtube result found*" }, message.key, message);
+          await client.sendErrorMessage(message.from, { text: "*Not youtube video result found*" }, message.key, message);
           return global.catchError = true;
         }
         let p = message.client.command == "song" ? false : true;
         let caption = createCaption(video, p, ezio);
-        const Buttons = [ { buttonId: `ytmp4-s ${video.url}`, buttonText: { displayText: "🎞 Video 📽️" }, type: 1,},];
+        const Buttons = [ { buttonId: `ytmp4 ${video.url}`, buttonText: { displayText: "🎞 Video 📽️" }, type: 1,},];
         const Message = {
           image: { url: video.thumbnail }, caption,
           footer: ezio.config.exif.footer,
@@ -76,7 +76,7 @@ ezio.addCommand(
             await client.sendReact(message.from, "🎧", aMsg.key);
             global.catchError = false;
           } else {
-            await client.sendErrorMessage(message.from, { text: "*Sorry I cant downlode it.*" }, message.key, message);
+            await client.sendMessage( message.from,{ text: "*Sorry I cant downlode it.*"}, { quoted: message},);
             return global.catchError = true;
           }
         });
@@ -92,7 +92,7 @@ ezio.addCommand(
   { pattern: ["ryt-video", "rvideo", "video", "yt-video"], desc: "you can dowloade video from youtube", usage: "<url|query>", sucReact: "📥", category: ["downloade", "all"], },
   async (message, client) => {
     if (!message.client.text) {
-      await client.sendErrorMessage( message.from, lang.NEED_TEXT_SONG, message.key, message);
+      await client.sendMessage( message.from,{ text: lang.NEED_TEXT_SONG}, { quoted: message},);
       return global.catchError = true;
     }
     try {
@@ -110,7 +110,7 @@ ezio.addCommand(
             await client.sendReact(message.from, "🎞", aMsg.key);
             global.catchError = false;
           } else {
-            await client.sendErrorMessage(message.from, { text: "*Sorry I cant downlode it.*" }, message.key, message);
+            await client.sendMessage( message.from,{ text: "*Sorry I cant downlode it.*"}, { quoted: message},);
             return global.catchError = true;
           }
         });
@@ -118,19 +118,19 @@ ezio.addCommand(
         let text = message.client.text;
         let ytResult = await yts(text)
         if (ytResult.videos?.[0]?.title == undefined) {
-          await client.sendErrorMessage(message.from, { text: "*Not youtube result found*" }, message.key, message);
+          await client.sendMessage( message.from,{ text: "*Not youtube result found.*"}, { quoted: message},);
           return global.catchError = true;
         }
         let video = undefined;
         if (message.client.command == "video" || message.client.command == "yt-video") { video = ytResult.videos?.[0] } 
         else { video = ytResult.videos?.[Math.floor(Math.random() * ytResult.videos?.length)] } 
         if (video == undefined) {
-          await client.sendErrorMessage(message.from, { text: "*Not youtube result found*" }, message.key, message);
+          await client.sendMessage( message.from,{ text: "*Not youtube video result found*"}, { quoted: message},);
           return global.catchError = true;
         }
         let p = message.client.command == "video" || message.client.command == "yt-video" ? false : true;
         let caption = createCaption(video, p, ezio);
-        const Buttons = [ { buttonId: `ytmp3-s ${video.url}`, buttonText: { displayText: "🎼 Audio 🎵" }, type: 1 }, ];
+        const Buttons = [ { buttonId: `ytmp3 ${video.url}`, buttonText: { displayText: "🎼 Audio 🎵" }, type: 1 }, ];
         const Message = {
           image: { url: video.thumbnail }, caption,
           footer: ezio.config.exif.footer,
@@ -148,7 +148,7 @@ ezio.addCommand(
             await client.sendReact(message.from, "🎞", aMsg.key);
             global.catchError = false;
           } else {
-            await client.sendErrorMessage(message.from, { text: "*Sorry I cant downlode it.*" }, message.key, message);
+            await client.sendMessage( message.from,{ text: "*Sorry I cant downlode it.*"}, { quoted: message},);
             return global.catchError = true;
           }
         });

@@ -13,6 +13,7 @@
 const yts = require("yt-search");
 const ezio = require("../events");
 const lang = ezio.getString("scrapers");
+const { createCaption } = require("../lib/ezioFunc");
 
 ezio.addCommand(
   { 
@@ -47,19 +48,7 @@ ezio.addCommand(
       }
       let Message = {
         image: { url: result.thumbnail },
-        caption: `
-  —————————————————————————
-  ♻ Title : ${result.title}
-  ♻ Ext : Search [first result]
-  ♻ ID : ${result.videoId}
-  ♻ Duration : ${result.timestamp}
-  ♻ Viewes : ${result.views}
-  ♻ Uploaded On : ${result.ago}
-  ♻ Author : ${result.author.name}
-  ♻ Channel : ${result.author.url}
-  ♻ Description : ${result.description}
-  ♻ Url : ${result.url}
-  —————————————————————————`,
+        caption: createCaption(result, false, ezio),
         footer: ezio.config.exif.footer,
         buttons: buttons,
       };
@@ -89,19 +78,7 @@ ezio.addCommand(
       ];
       let buttonMessage = {
         image: { url: result.thumbnail },
-        caption: `
-  —————————————————————————
-  ♻ Title : ${result.title}
-  ♻ Ext : Search [Random result]
-  ♻ ID : ${result.videoId}
-  ♻ Duration : ${result.timestamp}
-  ♻ Viewes : ${result.views}
-  ♻ Uploaded On : ${result.ago}
-  ♻ Author : ${result.author.name}
-  ♻ Channel : ${result.author.url}
-  ♻ Description : ${result.description}
-  ♻ Url : ${result.url}
-  —————————————————————————`,
+        caption: createCaption(result, true, ezio),
         footer: ezio.config.exif.footer,
         buttons: buttons,
       };
