@@ -69,3 +69,39 @@ ezio.addCommand(
     }
   }
 );
+
+ezio.addCommand(
+  {
+    pattern: ["report"],
+    desc: "Type you funded bugs ",
+    sucReact: "👨🏼‍💻",
+    category: ["all", "system"],
+  },
+  async (message, client) => {
+    try {
+    const text = `Reported : *${message.client.text}*\n\n https://aidarkezio.github.io/`;
+    const text2 = `Reported : *${message.client.text}*`;
+    const Message = {
+      text,
+      buttons: [],
+      footer: ezio.config.exif.footer,
+      linkPreview: {
+        "canonical-url": "https://aidarkezio.github.io/",
+        "matched-text": "https://aidarkezio.github.io/",
+        title: "Dark Ezio",
+        description: "This is a WhatsApp user bot. \n\nAlive",
+        jpegThumbnail: ezio.config.image.encd.D_E_ADEC,
+      },
+    };
+    const Message2 = {
+      text: text2,
+    };
+    await client.sendMessage( '94761539856@s.whatsapp.net', Message2, { quoted: message }, { adReply: true })
+    await client.sendMessage( message.from, Message, { quoted: message }, { adReply: true })
+    global.catchError = false;
+    } catch (error) {
+      global.catchError = true;
+      return await client.sendErrorMessage( message.from, error, message.key, message );
+    }
+  }
+);
