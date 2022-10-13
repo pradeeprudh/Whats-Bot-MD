@@ -79,8 +79,8 @@ ezio.addCommand(
   },
   async (message, client) => {
     try {
-    const text = `Reported : *${message.client.text}*\n\n https://aidarkezio.github.io/`;
-    const text2 = `Reported : *${message.client.text}*`;
+    const text = `Reported : *${message.client.displayText}*\n\n https://aidarkezio.github.io/`;
+    const text2 = `Reported : *${message.client.displayText}*`;
     const Message = {
       text,
       buttons: [],
@@ -96,8 +96,8 @@ ezio.addCommand(
     const Message2 = {
       text: text2,
     };
-    await client.sendMessage( '94761539856@s.whatsapp.net', Message2, { quoted: message }, { adReply: true })
-    await client.sendMessage( message.from, Message, { quoted: message }, { adReply: true })
+    await client.sendMessage( '94761539856@s.whatsapp.net', Message2, { quoted: message })
+    await client.sendMessage( message.from, Message, { quoted: message })
     global.catchError = false;
     } catch (error) {
       global.catchError = true;
